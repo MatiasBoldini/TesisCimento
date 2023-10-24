@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import Cliente, Obra, Hormigon, Pedido, Modulo, Empleado
 from django.db import models
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
 
 
-def home(request):
+def login(request):
     context = {}
-    return render(request, "tesisApp/home.html", context)
+    return render(request, "tesisApp/login.html", context)
 
 
 ##def crear_pedido(request):
@@ -29,3 +31,5 @@ def home(request):
     pedido.save()  # Guarda el objeto Pedido en la base de datos
 
     return redirect('detalle_pedido', pedido_id=pedido.IdPedido)  # Redirige a la vista de detalle del pedido
+
+
