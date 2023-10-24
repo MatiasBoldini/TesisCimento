@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.hashers import make_password, check_password
 
 #Aqui van los modelos de las clases de la base de datos.
 
@@ -29,8 +30,13 @@ class Empleado(models.Model):
     apellido = models.CharField(max_length=100)
     email = models.EmailField()
     telefono = models.CharField(max_length=15)
-    clave = models.CharField(max_length=128) 
+    clave = models.CharField(max_length=20)
 
+    def set_password(self, password):
+        self.clave = make_password(password)
+
+    def check_password(self, password):
+        return check_password(password, self.clave)
 
 class Cliente(models.Model):
     DNICliente = models.CharField(primary_key=True, max_length=15)  # Clave primaria
