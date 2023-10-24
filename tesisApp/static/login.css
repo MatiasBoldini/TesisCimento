@@ -1,3 +1,4 @@
+/*-----------------------------------Login-----------------------------*/
 body {
     background-color: black;
 }
@@ -13,6 +14,10 @@ body {
 
 .my-logo img {
     width: 100px;
+}
+
+.vh-100 {
+    height: 65vh!important;
 }
 
 .titulo-principal {
@@ -36,6 +41,11 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+#inputForm {
+    background-color: transparent; /* Establece el fondo inicialmente transparente */
+    color: white;
+}
+
 .btn-primary {
     background: linear-gradient(270deg, #005c95 0, #019fda 100%);
     color: #fff;
@@ -50,13 +60,4 @@ body {
     padding-left: 1.25rem;
 }
 
-.vh-100 {
-    height: 65vh!important;
-}
-
-/* static/myapp/styles.css */
-
-#inputForm {
-    background-color: transparent; /* Establece el fondo inicialmente transparente */
-    color: white;
-}
+/* --------------------------Registro--------------------------------------*/
