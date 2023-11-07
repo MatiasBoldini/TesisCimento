@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 #Aqui van los modelos de las clases de la base de datos.
 
@@ -67,31 +68,13 @@ class Hormigon(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.CharField(max_length=250)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
-    
-
-    def __str__(self):
-        return self.nombre
-
-    def save(self, *args, **kwargs):
-        if self.pk:  
-            old_hormigon = Hormigon.objects.get(pk=self.pk)
-            if old_hormigon.precio != self.precio:
-                registro_precio = RegistroPrecioHormigon(hormigon=old_hormigon, precio_anterior=old_hormigon.precio, precio_nuevo=self.precio)
-                registro_precio.save() 
-        return super(Hormigon, self).save(*args, **kwargs)
 
 
-class RegistroPrecioHormigon(models.Model):
+class RegistroPrecio(models.Model):
     hormigon = models.ForeignKey(Hormigon, on_delete=models.CASCADE)
     precio_anterior = models.DecimalField(max_digits=10, decimal_places=2)
-    precio_nuevo = models.DecimalField(max_digits=10, decimal_places=2)
-    fecha_modificacion = models.DateTimeField(auto_now_add=True)
-
-    def save(self, *args, **kwargs):
-        if self.pk is not None:  
-            old_price = RegistroPrecioHormigon.objects.get(pk=self.pk).precio_nuevo
-            self.precio_anterior = old_price
-        return super(RegistroPrecioHormigon, self).save(*args, **kwargs)
+    nuevo_precio = models.DecimalField(max_digits=10, decimal_places=2)
+    fecha_cambio = models.DateTimeField(default=timezone.now)
 
 
 class Pedido(models.Model):
