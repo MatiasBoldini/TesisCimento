@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <link rel="stylesheet" type="text/css" href="static/login.css">
+    <script src="static/java.js"></script>
+
+    <title>Pagina De Usuario Registrado</title>
+</head>
+<body class="cuerpo">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: black">
+        <div class="container-fluid" >
+            <a class="navbar-brand my-logo" href="#">
+                
+                <img src="static/hc.jpg" alt="Logo de mi empresa" class="img-fluid float-left">
+            </a>
+        </div>
+    </nav>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="col-lg-6">
+            <section class="container mt-custom">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <h1 class="titulo-principal">El usuario fue creado con exito!</h1>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="container d-flex justify-content-center align-items-center vh-100">
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Nombre de usuario"><br>
+                <input type="password" name="password" placeholder="Contraseña"><br>
+                <input type="text" name="dni" placeholder="DNI"><br>
+                <input type="text" name="nombre" placeholder="Nombre"><br>
+                <input type="text" name="apellido" placeholder="Apellido"><br>
+                <input type="email" name="email" placeholder="Correo electrónico"><br>
+                <input type="text" name="telefono" placeholder="Teléfono"><br>
+                <select name="rol">
+                    <option value="0">Gerente</option>
+                    <option value="1">Logística</option>
+                    <option value="2">Plantista</option>
+                    <option value="3">Transportista</option>
+                    <option value="4">Administracion</option>
+                </select><br>
+                <button type="submit">Crear Usuario y Empleado</button>
+            </form>
+        </div>
+</body>
+</html>
