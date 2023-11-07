@@ -38,6 +38,7 @@ class Empleado(models.Model):
     def check_password(self, password):
         return check_password(password, self.clave)
 
+
 class Cliente(models.Model):
     DNICliente = models.CharField(primary_key=True, max_length=15)
     nombre = models.CharField(max_length=100)
@@ -78,6 +79,7 @@ class Hormigon(models.Model):
                 registro_precio = RegistroPrecioHormigon(hormigon=old_hormigon, precio_anterior=old_hormigon.precio, precio_nuevo=self.precio)
                 registro_precio.save() 
         return super(Hormigon, self).save(*args, **kwargs)
+
 
 class RegistroPrecioHormigon(models.Model):
     hormigon = models.ForeignKey(Hormigon, on_delete=models.CASCADE)

@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth import authenticate, login as auth_login
 from django.http import HttpResponseRedirect
 from .authentication import authenticate_by_dni
+from django.contrib.auth.models import User
 
 
 def home(request):
@@ -15,6 +16,7 @@ def ingresaste(request):
     context = {}
     return render(request, 'tesisApp/ingresaste.html', context)
 
+
 def login_view(request):
     if request.method == 'POST':
         dni = request.POST.get('dni')
@@ -22,13 +24,49 @@ def login_view(request):
         user = authenticate_by_dni(dni, password)
         
         if user:
-            auth_login(request, user)  # Cambia el nombre de la función de inicio de sesión
+            auth_login(request, user)
             return redirect('ingresaste')
         else:
             message = "Error: Las credenciales son inválidas"
             return render(request, 'login.html', {'message': message})
     return render(request, 'login.html')
 
+
+def usuariocreado(request):
+    context = {}
+    return render(request, 'tesisApp/usuariocreado.html', context)
+
+
+def crear_usuario_empleado(request):
+    if request.method == 'POST':
+        try:
+            # Obtener los datos del formulario
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            rol = int(request.POST.get('rol'))
+            dni = request.POST.get('dni')
+            nombre = request.POST.get('nombre')
+            apellido = request.POST.get('apellido')
+            email = request.POST.get('email')
+            telefono = request.POST.get('telefono')
+
+            # Crear un nuevo usuario
+            nuevo_usuario = User.objects.create_user(username=username, password=password)
+
+            # Verificar si el usuario se ha creado correctamente
+            if nuevo_usuario:
+                # Crear un nuevo empleado asociado al usuario
+                nuevo_empleado = Empleado(DNI=dni, user=nuevo_usuario, rol=rol, nombre=nombre, apellido=apellido, email=email, telefono=telefono)
+                nuevo_empleado.save()
+
+                return redirect('ingresaste')
+            else:
+                return render(request, 'usuariocreado.html')
+        except Exception as e:
+            print("Error:", e)  # Imprimir cualquier error en la consola para depurar
+            return render(request, 'usuariocreado.html')
+    else:
+        return render(request, 'usuariocreado.html')
 
 ##def crear_pedido(request):
     IdPedido = models.AutoField(primary_key=True)

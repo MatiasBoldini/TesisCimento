@@ -30,7 +30,7 @@
             </section>
         </div>
         <div class="container d-flex justify-content-center align-items-center vh-100">
-            <form method="post">
+            <form method="post" action="{% url 'crear_usuario_empleado' %}">
                 {% csrf_token %}
                 <input type="text" name="username" placeholder="Nombre de usuario"><br>
                 <input type="password" name="password" placeholder="Contraseña"><br>
@@ -44,10 +44,11 @@
                     <option value="1">Logística</option>
                     <option value="2">Plantista</option>
                     <option value="3">Transportista</option>
-                    <option value="4">Administracion</option>
+                    <option value="4">Administración</option>
                 </select><br>
                 <button type="submit">Crear Usuario y Empleado</button>
             </form>
+            
         </div>
 </body>
 </html>
