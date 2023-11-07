@@ -1,13 +1,33 @@
 from django.shortcuts import render, redirect
-from .models import Cliente, Obra, Hormigon, Pedido, Modulo, Empleado
+from .models import Cliente, Obra, Hormigon, Pedido, Empleado
 from django.db import models
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login as auth_login
 from django.http import HttpResponseRedirect
+from .authentication import authenticate_by_dni
 
 
-def login(request):
+def home(request):
     context = {}
     return render(request, "tesisApp/login.html", context)
+
+
+def ingresaste(request):
+    context = {}
+    return render(request, 'tesisApp/ingresaste.html', context)
+
+def login_view(request):
+    if request.method == 'POST':
+        dni = request.POST.get('dni')
+        password = request.POST.get('password')
+        user = authenticate_by_dni(dni, password)
+        
+        if user:
+            auth_login(request, user)  # Cambia el nombre de la función de inicio de sesión
+            return redirect('ingresaste')
+        else:
+            message = "Error: Las credenciales son inválidas"
+            return render(request, 'login.html', {'message': message})
+    return render(request, 'login.html')
 
 
 ##def crear_pedido(request):
