@@ -1,10 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cliente, Obra, Hormigon, Pedido, Empleado
 from django.db import models
 from django.contrib.auth import authenticate, login as auth_login
 from django.http import HttpResponseRedirect
 from .authentication import authenticate_by_dni
 from django.contrib.auth.models import User
+from. import forms
+from .forms import ModificarPrecioForm
+
 
 
 def home(request):
@@ -40,7 +43,7 @@ def usuariocreado(request):
 def crear_usuario_empleado(request):
     if request.method == 'POST':
         try:
-            # Obtener los datos del formulario
+         
             username = request.POST.get('username')
             password = request.POST.get('password')
             rol = int(request.POST.get('rol'))
@@ -50,12 +53,12 @@ def crear_usuario_empleado(request):
             email = request.POST.get('email')
             telefono = request.POST.get('telefono')
 
-            # Crear un nuevo usuario
+         
             nuevo_usuario = User.objects.create_user(username=username, password=password)
 
-            # Verificar si el usuario se ha creado correctamente
+          
             if nuevo_usuario:
-                # Crear un nuevo empleado asociado al usuario
+               
                 nuevo_empleado = Empleado(DNI=dni, user=nuevo_usuario, rol=rol, nombre=nombre, apellido=apellido, email=email, telefono=telefono)
                 nuevo_empleado.save()
 
@@ -63,10 +66,48 @@ def crear_usuario_empleado(request):
             else:
                 return render(request, 'usuariocreado.html')
         except Exception as e:
-            print("Error:", e)  # Imprimir cualquier error en la consola para depurar
+            print("Error:", e)  
             return render(request, 'usuariocreado.html')
     else:
         return render(request, 'usuariocreado.html')
+
+
+def modificar_precio(request, IdHormigon=None):
+    hormigon = None
+
+    if IdHormigon:
+        
+        hormigon = get_object_or_404(Hormigon, IdHormigon=IdHormigon)
+
+    exito = False
+
+    if request.method == 'POST':
+        form = ModificarPrecioForm(request.POST)
+        if form.is_valid():
+            nuevo_precio = form.cleaned_data['nuevo_precio']
+
+            if hormigon:
+              
+                hormigon.precio = nuevo_precio
+                hormigon.save()
+                exito = True
+            else:
+               
+                nuevo_hormigon_nombre = form.cleaned_data['nuevo_hormigon_nombre']
+                hormigones = Hormigon.objects.filter(nombre=nuevo_hormigon_nombre)
+
+             
+                for h in hormigones:
+                    h.precio = nuevo_precio
+                    h.save()
+
+                exito = True
+
+    else:
+        form = ModificarPrecioForm()
+
+    return render(request, 'tesisApp/cambioprecio.html', {'form': form, 'hormigon': hormigon, 'exito': exito})
+
 
 ##def crear_pedido(request):
     IdPedido = models.AutoField(primary_key=True)

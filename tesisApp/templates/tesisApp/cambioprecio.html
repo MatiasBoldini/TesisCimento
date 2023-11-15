@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <link rel="stylesheet" type="text/css" href="static/login.css">
+    <script src="static/java.js"></script>
+
+    <title>Página de Cambio de Precio de Hormigones</title>
+</head>
+<body class="cuerpo">
+    <h1>Cambio de Precio</h1>
+
+    <form method="post" action="{% url 'cambioprecio_sin_id' %}">
+        {% csrf_token %}
+        <label for="nuevo_hormigon_nombre">Nombre del Nuevo Hormigon:</label>
+        <input type="text" name="nuevo_hormigon_nombre" required>
+        <label for="nuevo_precio">Precio del Nuevo Hormigon:</label>
+        <input type="number" name="nuevo_precio" step="0.01" required>
+        <input type="submit" value="Modificar Precio">
+    </form>
+
+    <ul>
+        {% for mensaje in cambios_precio %}
+            <li>{{ mensaje }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</body>
+</html>
