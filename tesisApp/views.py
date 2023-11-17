@@ -109,6 +109,12 @@ def modificar_precio(request, IdHormigon=None):
     return render(request, 'tesisApp/cambioprecio.html', {'form': form, 'hormigon': hormigon, 'exito': exito})
 
 
+def correRec(request):
+    context = {}
+    return render(request, "tesisApp/correoRec.html", context)
+
+
+
 ##def crear_pedido(request):
     IdPedido = models.AutoField(primary_key=True)
     # Obtén el cliente, obra y otros datos necesarios para crear el pedido

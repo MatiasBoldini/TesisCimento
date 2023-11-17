@@ -29,6 +29,8 @@ nav {
     font-family: "Poppins", sans-serif;
 }
 
+
+
 .form-control {
     max-width: 100%;
     width: 100%; /* Cambia el ancho del formulario para que sea más flexible */
@@ -118,3 +120,4 @@ nav {
 }
 
 /* CambioPrecio */
+
