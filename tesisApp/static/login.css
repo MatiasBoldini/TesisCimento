@@ -2,7 +2,9 @@
 body {
     background-color: black;
 }
-
+nav {
+    margin-bottom: 6rem; /* Agrega un margen inferior al navbar utilizando las clases de Bootstrap */
+}
 .navegador {
     width: 100%;
     margin-left: 0;
@@ -21,7 +23,7 @@ body {
 }
 
 .titulo-principal {
-    color: #fff;
+    color: white;
     font-size: 2rem; /* Ajusta el tamaño del título */
     font-weight: 700;
     font-family: "Poppins", sans-serif;
@@ -46,9 +48,9 @@ body {
     color: white;
 }
 
-.btn-primary {
+.btn-inicio {
     background: linear-gradient(270deg, #005c95 0, #019fda 100%);
-    color: #fff;
+    color: white;
     border-radius: 1.5625rem;
     font-family: "Poppins", sans-serif;
     max-width: 100%;
@@ -61,3 +63,58 @@ body {
 }
 
 /* --------------------------Registro--------------------------------------*/
+
+
+/* Estilo para el botón "Agregar" */
+.btn-agregar {
+    /* Agrega tus estilos personalizados aquí */
+    background: linear-gradient(270deg, #005c95 0, #019fda 100%);
+    color: #fff;
+    border-radius: 1.5625rem;
+    border: none; /* Quita el borde */
+    font-family: "Poppins", sans-serif;
+    max-width: 100%;
+    width: 100%; /* Cambia el ancho del botón para que sea más flexible */
+    height: 3.125rem;
+    border-radius: 1.5625rem;
+    outline: 0;
+    font-size: 1.125rem;
+    padding-left: 1.25rem;
+}
+
+/* Estilo para el botón "Modificar" */
+.btn-modificar {
+    /* Agrega tus estilos personalizados aquí */
+    background:linear-gradient(270deg,#088f4cf5 0, #64de64 100%);
+    color: #fff;
+    border: none; /* Quita el borde */
+    border-radius: 1.5625rem;
+    
+    font-family: "Poppins", sans-serif;
+    max-width: 100%;
+    width: 100%; /* Cambia el ancho del botón para que sea más flexible */
+    height: 3.125rem;
+    border-radius: 1.5625rem;
+    outline: 0;
+    font-size: 1.125rem;
+    padding-left: 1.25rem;
+}
+
+/* Estilo para el botón "Eliminar" */
+.btn-eliminar {
+    /* Agrega tus estilos personalizados aquí */
+    background: linear-gradient(270deg, #833535  0, #FF0000  100%);
+    color: #fff;
+    border: none; /* Quita el borde */
+    border-radius: 1.5625rem;
+    font-family: "Poppins", sans-serif;
+    max-width: 100%;
+    width: 100%; /* Cambia el ancho del botón para que sea más flexible */
+    height: 3.125rem;
+    border-radius: 1.5625rem;
+    outline: 0;
+    font-size: 1.125rem;
+    padding-left: 1.25rem;
+}
+
+/* CambioPrecio */
