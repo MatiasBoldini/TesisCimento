@@ -113,6 +113,10 @@ def correRec(request):
     context = {}
     return render(request, "tesisApp/correoRec.html", context)
 
+def nuevaContrasena(request):
+    context = {}
+    return render(request, "tesisApp/nuevaContrasena.html", context)
+
 
 
 ##def crear_pedido(request):
