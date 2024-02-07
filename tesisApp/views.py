@@ -117,6 +117,14 @@ def nuevaContrasena(request):
     context = {}
     return render(request, "tesisApp/nuevaContrasena.html", context)
 
+def codigoVerificacion(request):
+    context = {}
+    return render(request, "tesisApp/codigoVerificacion.html", context)
+
+def cargaPedidos(request):
+    context= {}
+    return render(request, "tesisApp/cargaPedidos.html")
+
 
 
 ##def crear_pedido(request):

@@ -11,7 +11,9 @@ urlpatterns = [
     path('cambioprecio/', views.modificar_precio, name='cambioprecio_sin_id'),
     path('cambioprecio/<int:IdHormigon>/', views.modificar_precio, name='cambioprecio'),
     path('correoRec/', views.correRec, name='correoRec'),
-    path('nuevaContrasena', views.nuevaContrasena, name='nuevaContrasena')
+    path('nuevaContrasena', views.nuevaContrasena, name='nuevaContrasena'),
+    path('codigoVerificacion', views.codigoVerificacion, name='codigoVerificacion'),
+    path('cargaPedidos', views.cargaPedidos, name='cargaPedidos')
 ]
 
 

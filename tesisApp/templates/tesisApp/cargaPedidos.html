@@ -1,0 +1,98 @@
+{% extends './layout.html' %}
+
+{% block title %}
+    Carga de pedidos
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-90">
+    <div class="col-lg-6">
+        <section class="container mt-custom mb-4"> <!-- Mantenemos la clase mt-custom -->
+            <div class="row mb-2"> <!-- Reducimos el margen para un ajuste más preciso -->
+                <div class="col-12 text-center">
+                    <h1 class="titulo-principal">Carga de Pedidos</h1>
+                </div>
+            </div>
+        </section>
+        <form method="post" action="">
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="DNI" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Nombre y Apellido" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="dni" placeholder="Tipo de Obra" required>
+            </div>
+            <div class="form-group d-flex align-items-center">
+                <input type="date" class="form-control" id="fecha-entrega" name="fecha_entrega" placeholder="Fecha de Entrega" required>
+                <span class="icon">&#128197;</span>
+            </div>            
+            <div class="form-group d-flex align-items-center">
+                <select name="rol" class="form-control">
+                    <option value="0">H13</option>
+                    <option value="1">H15</option>
+                    <option value="2">H17</option>
+                    <option value="3">H19</option>
+                    <option value="4">H21</option>
+                    <option value="5">H22</option>
+                    <option value="6">H23</option>
+                    <option value="7">H25</option>
+                </select>    
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Cantidad de m3" required>
+            </div>
+            <div class="form-group d-flex flex-column align-items-center">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">DNI</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Monto</th>
+                                <th scope="col">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>42303884</td>
+                                <td>Matias Boldini</td>
+                                <td>20</td>
+                                <td>H15</td>
+                                <td>$20.000</td>
+                                <td>15/09/23</td>
+                            </tr>
+                            <tr>
+                                <td>42303884</td>
+                                <td>Matias Boldini</td>
+                                <td>15</td>
+                                <td>H17</td>
+                                <td>$13.000</td>
+                                <td>15/09/23</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="icons-container">
+                    <button type="submit" class="btn btn-primary btn-modificar mr-2 btn-grande">Agregar</button>
+                    <button type="submit" class="btn btn-primary btn-eliminar btn-grande">Eliminar</button>
+                </div>                            
+            </div>               
+            <div class="form-group d-flex align-items-center">
+                <h2 class="mr-3 mb-0">Valor Total:</h2>
+                <input type="text" class="form-control transparent-input align-self-stretch" name="valor_total" placeholder="33.333" disabled>
+            </div>                                     
+            <div class="text-center mb-2"> 
+                <button type="submit" class="btn btn-primary btn-block btn-agregar">Confirmar</button>
+            </div>
+            <div class="text-center mb-2"> 
+                <button type="submit" class="btn btn-primary btn-block btn-consultar">Consulta</button>
+            </div>          
+        </form>
+    </div>
+</div>
+
+{% endblock %}

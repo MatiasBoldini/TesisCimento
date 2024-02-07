@@ -45,6 +45,13 @@ nav {
     font-family: "Poppins", sans-serif;
 }
 
+
+
+.form-control:focus{
+    background-color: transparent;
+}
+
+
 #inputForm {
     background-color: transparent; /* Establece el fondo inicialmente transparente */
     color: white;
@@ -119,5 +126,111 @@ nav {
     padding-left: 1.25rem;
 }
 
-/* CambioPrecio */
 
+/* Estilo para el botón "Consultar" */
+.btn-consultar {
+    /* Agrega tus estilos personalizados aquí */
+    background: linear-gradient(to right, #FFD700 0%, #333333 100%);
+
+    color: #fff;
+    border: none; /* Quita el borde */
+    border-radius: 1.5625rem;
+    font-family: "Poppins", sans-serif;
+    max-width: 100%;
+    width: 100%; /* Cambia el ancho del botón para que sea más flexible */
+    height: 3.125rem;
+    border-radius: 1.5625rem;
+    outline: 0;
+    font-size: 1.125rem;
+    padding-left: 1.25rem;
+}
+
+
+
+
+
+.mt-custom-3 {
+    margin-top: -1 rem; /* Ajustamos el margen superior según sea necesario */
+}
+/* codigoVerifiación */
+
+/* Estilos para los inputs */
+/* Estilos para los inputs */
+.custom-input {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 1px solid #ccc;
+    background-color: black;
+    text-align: center;
+    color: #888;
+    margin-right: 10px; /* Espacio entre los inputs */
+}
+
+.input-container {
+    display: flex;
+}
+
+.input-error {
+    border-color: red;
+}
+
+.custom-input:focus {
+    background-color: transparent; /* Puedes cambiar a "transparent" o "black" según tu preferencia */
+}
+
+/* Carga de Pedidos css, colocando icons al lado de los inputs */
+.form-group {
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    flex: 1; /* El input tomará el espacio restante */
+}
+
+.icon {
+    margin-left: 5px; /* Ajusta el espacio entre el input y el icono según sea necesario */
+    font-size: 25px;
+}
+
+/* Formulario carga pedidos */
+
+.table {
+    background-color: white;
+    color: black;
+    text-align: center;
+}
+
+/* Estilos para las celdas de encabezado */
+.table th {
+    background-color: #ccc; /* Color de fondo del encabezado */
+}
+
+/* Estilos para las celdas de datos */
+.table td {
+    border: 1px solid #ddd; /* Borde de las celdas de datos */
+    padding: 8px; /* Espaciado interno de las celdas de datos */
+}
+
+.mr-3 {
+    color: #fff;
+    background-color: transparent;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.125rem;
+}
+
+.icons-container .btn {
+    display: inline-block ;
+    width: auto ;
+}
+
+.icons-container .btn-grande {
+    font-size: 1.2rem; /* Ajusta el tamaño de la fuente */
+    padding: 12px 24px; /* Ajusta el relleno para hacer los botones más grandes */
+}
+
+.transparent-input {
+    background-color: transparent !important;
+    box-shadow: none; /* Elimina la sombra si es necesario */
+}
