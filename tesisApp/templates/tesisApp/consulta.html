@@ -1,0 +1,61 @@
+{% extends './layout.html' %}
+
+{% block title %}
+    Carga de pedidos
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-90">
+    <div class="col-lg-6">
+        <section class="container mt-custom mb-4"> <!-- Mantenemos la clase mt-custom -->
+            <div class="row mb-2"> <!-- Reducimos el margen para un ajuste más preciso -->
+                <div class="col-12 text-center">
+                    <h1 class="titulo-principal">Consulta de Pedidos por Cliente</h1>
+                </div>
+            </div>
+        </section>
+        <form method="post" action="">
+            <div class="form-group d-flex align-items-center">
+                <h2 class="mr-3 mb-0">Ingresar nombre:</h2>
+                <input type="text" class="form-control transparent-input mr-3" name="valor_nombre" placeholder="Agustin">
+                <button type="submit" class="btn btn-transparent p-0">&#128269;</button>
+            </div>            
+            <div class="form-group d-flex flex-column align-items-center">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">DNI</th>
+                                <th scope="col">Tipo Hormigon</th>
+                                <th scope="col">Cantidad H</th>
+                                <th scope="col">Monto</th>
+                                <th scope="col">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>42303884</td>
+                                <td>H15</td>
+                                <td>23M3</td>
+                                <td>$23.000</td>
+                                <td>12/08/23</td>
+                            </tr>
+                            <tr>
+                                <td>42303884</td>
+                                <td>H17</td>
+                                <td>20m3</td>
+                                <td>$17.000</td>
+                                <td>15/09/23</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>                       
+            </div>                                                   
+            <div class="text-center mb-2"> 
+                <button type="submit" class="btn btn-primary btn-block btn-eliminar">Volver</button>
+            </div>       
+        </form>
+    </div>
+</div>
+
+{% endblock %}

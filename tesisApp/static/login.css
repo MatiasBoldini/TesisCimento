@@ -232,5 +232,15 @@ nav {
 
 .transparent-input {
     background-color: transparent !important;
-    box-shadow: none; /* Elimina la sombra si es necesario */
+    box-shadow: none; /* Elimina la sombra si es necesarioss */
+}
+
+
+/* Consulta pedido por cliente */
+
+.btn-transparent {
+    background-color: transparent;
+    border: none;
+    font-size: 24px; /* Tamaño del botón personalizado */
+    padding: 10px 20px; /* Relleno del botón personalizado */
 }

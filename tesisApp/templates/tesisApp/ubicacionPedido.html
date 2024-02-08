@@ -1,0 +1,42 @@
+{% extends './layout.html' %}
+
+{% block title %}
+    Ubicación del Pedido
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-90">
+    <div class="col-lg-6">
+        <section class="container mt-custom mb-4"> <!-- Mantenemos la clase mt-custom -->
+            <div class="row mb-2"> <!-- Reducimos el margen para un ajuste más preciso -->
+                <div class="col-12 text-center">
+                    <h1 class="titulo-principal">Ubicación del Pedido</h1>
+                </div>
+            </div>
+        </section>
+        <form method="post" action="">
+            <div class="form-group">
+                <input type="text" class="form-control" name="tipoobra" placeholder="Platea" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="tHormigon" placeholder="H17/H21" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="cantMetros" placeholder="15/12" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="nombre" placeholder="Matias Boldini" required>
+            </div>    
+            <div class="form-group">
+                <input type="text" class="form-control" name="telefono" placeholder="3513840274" required>
+            </div>                                              
+            <div class="text-center mb-2"> 
+                <button type="submit" class="btn btn-primary btn-block btn-agregar">Pedido Entregado</button>
+            </div>    
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}

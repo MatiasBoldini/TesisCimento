@@ -13,7 +13,9 @@ urlpatterns = [
     path('correoRec/', views.correRec, name='correoRec'),
     path('nuevaContrasena', views.nuevaContrasena, name='nuevaContrasena'),
     path('codigoVerificacion', views.codigoVerificacion, name='codigoVerificacion'),
-    path('cargaPedidos', views.cargaPedidos, name='cargaPedidos')
+    path('cargaPedidos', views.cargaPedidos, name='cargaPedidos'),
+    path('consulta', views.consulta, name='consulta'),
+    path('ubicacionPedido', views.ubicacionPedido, name="ubicacionPediedo")
 ]
 
 

@@ -125,6 +125,14 @@ def cargaPedidos(request):
     context= {}
     return render(request, "tesisApp/cargaPedidos.html")
 
+def consulta(request):
+    context = {}
+    return render(request, "tesisApp/consulta.html")
+
+def ubicacionPedido(request):
+    context = {}
+    return render(request, "tesisApp/ubicacionPedido.html")
+
 
 
 ##def crear_pedido(request):
