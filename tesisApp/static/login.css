@@ -244,3 +244,22 @@ nav {
     font-size: 24px; /* Tamaño del botón personalizado */
     padding: 10px 20px; /* Relleno del botón personalizado */
 }
+
+/* map */
+
+#map {
+    height: 500px;
+    width: 100%;
+}
+
+/* AsignacionModulos */
+
+.fila {
+    color: black;
+}
+
+.btn-custom-celeste {
+    background-color: #56cff0; /* Cambia este valor por el color celeste que desees */
+    color: black; /* Texto en color blanco */
+    /* Puedes agregar más estilos según sea necesario */
+}

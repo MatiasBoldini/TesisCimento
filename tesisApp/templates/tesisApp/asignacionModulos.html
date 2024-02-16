@@ -1,0 +1,86 @@
+{% extends './layout.html' %}
+
+{% block title %}
+    Asignación de Módulos
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-90">
+    <div class="col-lg-6">
+        <section class="container mt-custom mb-4"> <!-- Mantenemos la clase mt-custom -->
+            <div class="row mb-2"> <!-- Reducimos el margen para un ajuste más preciso -->
+                <div class="col-12 text-center">
+                    <h1 class="titulo-principal">Asignación de Módulos</h1>
+                </div>
+            </div>
+        </section>
+        <form method="post" action="">
+            <div class="form-group d-flex align-items-center">
+                <input type="text" class="form-control transparent-input mr-3" name="dni" placeholder="DNI">
+                <button type="submit" class="btn btn-transparent p-0">&#128269;</button>
+            </div>  
+            <div class="form-group">
+                <input type="text" class="form-control" name="nombre" placeholder="Nombre completo" required>
+            </div>
+            
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="table-responsive" style="margin-bottom: 20px;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="fila">Módulos sin asignar:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Carga de pedidos</td>
+                            </tr>
+                            <tr>
+                                <td>Informes</td>
+                            </tr>
+                            <tr>
+                                <td>Calendario de Pedidos</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin: 0 10px;">
+                    <div class="d-flex flex-column justify-content-between align-items-center">
+                        <button type="button" class="btn btn-custom-celeste" style="margin-bottom: 10px;">></button>
+                        <button type="button" class="btn btn-custom-celeste"> < </button>
+                    </div>
+                </div>                
+                
+                <div class="table-responsive" style="margin-bottom: 20px;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="fila">Módulos asignados:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ubicación del pedido</td>
+                            </tr>
+                            <tr>
+                                <td>Actualización de Precios</td>
+                            </tr>
+                            <tr>
+                                <td>Calendario de Pedidos</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>                                     
+        
+            <div class="text-center mb-2"> 
+                <button type="submit" class="btn btn-primary btn-block btn-agregar">Confirmar</button>
+            </div>
+        </form>
+        
+  
+    </div>
+</div>
+
+{% endblock %}

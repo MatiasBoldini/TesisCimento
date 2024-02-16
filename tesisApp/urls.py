@@ -15,7 +15,10 @@ urlpatterns = [
     path('codigoVerificacion', views.codigoVerificacion, name='codigoVerificacion'),
     path('cargaPedidos', views.cargaPedidos, name='cargaPedidos'),
     path('consulta', views.consulta, name='consulta'),
-    path('ubicacionPedido', views.ubicacionPedido, name="ubicacionPediedo")
+    path('ubicacionPedido', views.ubicacionPedido, name="ubicacionPedido"),
+    path('asignacionModulos', views.asignacionModulos, name="asignacionModulos"),
+    path('calendarioPedidos', views.calendarioPedidos, name="calendarioPedidos")
+
 ]
 
 

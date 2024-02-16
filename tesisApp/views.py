@@ -133,7 +133,13 @@ def ubicacionPedido(request):
     context = {}
     return render(request, "tesisApp/ubicacionPedido.html")
 
+def asignacionModulos(request):
+    context = {}
+    return render(request, "tesisApp/asignacionModulos.html")
 
+def calendarioPedidos(request):
+    context = {}
+    return render(request, "tesisApp/calendarioPedidos.html")
 
 ##def crear_pedido(request):
     IdPedido = models.AutoField(primary_key=True)

@@ -1,0 +1,50 @@
+{% extends './layout.html' %}
+
+{% block title %}
+    Página Calendario de Pedidos
+{% endblock %}
+
+{% block content %}
+    
+    <div class="container d-flex justify-content-center align-items-center vh-90">
+        <div class="col-lg-6">
+            <section class="container mt-custom mb-4"> <!-- Mantenemos la clase mt-custom -->
+                <div class="row mb-2"> <!-- Reducimos el margen para un ajuste más preciso -->
+                    <div class="col-12 text-center">
+                        <h1 class="titulo-principal">Calendario de Pedidos</h1>
+                    </div>
+                </div>
+            </section>
+            <form method="post" action=""> 
+                <div class="form-group d-flex flex-column align-items-center">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Horario</th>
+                                    <th scope="col">Th-Mts</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Agustin Mastilla</td>
+                                    <td>09:00 am</td>
+                                    <td>H17-20m</td>
+                                </tr>
+                                <tr>
+                                    <td>Matias Boldini</td>
+                                    <td>12:30 am</td>
+                                    <td>H23-8m</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                       
+                </div>                                             
+                <div class="text-center mb-2"> 
+                    <button type="submit" class="btn btn-primary btn-block btn-agregar">Pedido Preparado</button>
+                </div>    
+            </form>
+        </div>
+    </div>
+{% endblock %}
