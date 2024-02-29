@@ -17,7 +17,8 @@ urlpatterns = [
     path('consulta', views.consulta, name='consulta'),
     path('ubicacionPedido', views.ubicacionPedido, name="ubicacionPedido"),
     path('asignacionModulos', views.asignacionModulos, name="asignacionModulos"),
-    path('calendarioPedidos', views.calendarioPedidos, name="calendarioPedidos")
+    path('calendarioPedidos', views.calendarioPedidos, name="calendarioPedidos"),
+    path('informes', views.informes, name="informes")
 
 ]
 

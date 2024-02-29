@@ -5,28 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" type="text/css" href="../../static/login.css?v=1.1">
     <title>{% block title %} Titulo por defecto {% endblock %} </title>
 </head>
 <body class="cuerpo">
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: black">
-        <div class="container-fluid" >
-            <a class="navbar-brand my-logo" href="#">
-                
-                <img src="../../static/hc.jpg" alt="Logo de mi empresa" class="img-fluid float-left">
-            </a>
+    <div class="contenedor">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: black">
+            <div class="container-fluid">
+                <a class="navbar-brand my-logo" href="#">
+                    <img src="../../static/hc.jpg" alt="Logo de mi empresa" class="img-fluid float-left" style="margin-right: 10px;">
+                </a>
+            </div>            
+        </nav>
+        <div class="wrapper">
+            <aside id="sidebar">
+
+                <div class="parte1">
+                    <div class="d-flex">
+                        <button class="toggle-btn" type="button">
+                            <i class="lni lni-grid-alt"></i>
+                        </button>
+                        <div class="sidebar-logo">
+                            <!-- <a href="#">Hormigones Cimento</a> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="parte2">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="lni lni-home"></i>
+                                <span>Inicio</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="lni lni-dollar"></i>
+                                <span>Actualización de Precios</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="lni lni-cart"></i>
+                                <span>Carga de Pedidos</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="lni lni-users"></i>
+                                <span>Gestionar Usuarios</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="lni lni-grid-alt"></i>
+                                <span>Asignación de Módulos</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="lni lni-calendar"></i>
+                                <span>Calendario de Pedidos</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="lni lni-stats-up"></i>
+                                <span>Informes</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="lni lni-map-marker"></i>
+                                <span>Ubicación del Pedido</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="sidebar-footer">
+                        <a href="#" class="sidebar-link">
+                            <i class="lni lni-exit"></i>
+                            <span>Salir</span>
+                        </a>
+                    </div>
+                </aside>
+            </div>
+                      
+            {% block content %}
+            {% endblock %} 
         </div>
-    </nav>
-    {% block content %}
-    {% endblock %} 
+    </div>
+
+
+    
 </body>
+
+
+
+
+
 <script src="../../static/java.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 <!-- Bootstrap-datepicker JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJVu9lkcHiW-SyZuqbMwCkwPL7DI8nq7s&callback=iniciarMap"></script>

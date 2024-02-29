@@ -141,6 +141,10 @@ def calendarioPedidos(request):
     context = {}
     return render(request, "tesisApp/calendarioPedidos.html")
 
+def informes(request):
+    context = {}
+    return render(request, "tesisApp/informes.html")
+
 ##def crear_pedido(request):
     IdPedido = models.AutoField(primary_key=True)
     # Obtén el cliente, obra y otros datos necesarios para crear el pedido
