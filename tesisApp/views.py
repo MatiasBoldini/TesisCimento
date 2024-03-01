@@ -137,9 +137,55 @@ def asignacionModulos(request):
     context = {}
     return render(request, "tesisApp/asignacionModulos.html")
 
+
+
+# def calendarioPedidos(request):
+#     # Obtener todos los pedidos de la base de datos
+    
+
+#     #pedidos = Pedido.objects.all()
+#     pedidos = Pedido.objects.filter(FechaDeEntrega='2024-01-03')
+
+#     if pedidos:
+#         # Imprimir información sobre los pedidos en la consola
+#         print(f'--- Hay pedidos disponibles. --- \n' )
+        
+#     else:
+#         print(f'--- No hay pedidos disponibles. --- \n' )
+#     # Renderizar la plantilla 'grilla_pedidos.html' con la lista de pedidos
+#     return render(request, 'tesisApp/calendarioPedidos.html', {'pedidos': pedidos})
+
+
+
 def calendarioPedidos(request):
-    context = {}
-    return render(request, "tesisApp/calendarioPedidos.html")
+    if request.method == 'POST':
+        # Obtener la fecha del cuerpo de la solicitud
+        formattedDate = request.POST.get('fecha', None)
+
+        
+        
+        if formattedDate:
+            # Realizar operaciones con la fecha
+            pedidos = Pedido.objects.filter(FechaDeEntrega=formattedDate)
+
+            if pedidos:
+                # Imprimir información sobre los pedidos en la consola del servidor
+                print(f'--- Hay pedidos disponibles para la fecha {formattedDate}. --- \n')
+            else:
+                print(f'--- No hay pedidos disponibles para la fecha {formattedDate}. --- \n')
+
+            
+            return render(request, 'tesisApp/calendarioPedidos.html', {'pedidos': pedidos})
+        else:
+            # Si no se proporciona la fecha, devolver un error
+            print('Error en la seleccion de fecha')
+    else:
+        print('Error en la seleccion de fecha')
+        pedidos = Pedido.objects.all()
+        return render(request, 'tesisApp/calendarioPedidos.html', {'pedidos': pedidos})
+
+
+
 
 def informes(request):
     context = {}

@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+
 #Aqui van los modelos de las clases de la base de datos.
 
 
@@ -77,6 +78,23 @@ class RegistroPrecio(models.Model):
     fecha_cambio = models.DateTimeField(default=timezone.now)
 
 
+# class Pedido(models.Model):
+#     IdPedido = models.AutoField(primary_key=True)
+#     DNICliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+#     IdObra = models.ForeignKey(Obra, on_delete=models.CASCADE)
+#     FechaDeEntrega = models.DateField()
+#     Hormigones = models.ManyToManyField('Hormigon')
+#     CantidadM3 = models.DecimalField(max_digits=10, decimal_places=2)
+#     EstadoPedido = models.CharField(max_length=50, choices=ESTADO_PEDIDO_CHOICES, default='Pendiente')
+
+#     def calcular_valor_total(self):
+#         valor_total = sum(hormigon.precio * self.CantidadM3 for hormigon in self.Hormigones.all())
+#         return valor_total
+
+#     def __str__(self):
+#         return f'Pedido {self.IdPedido} - Cliente: {self.NombreyApellidoCliente}'
+
+
 class Pedido(models.Model):
     IdPedido = models.AutoField(primary_key=True)
     DNICliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
@@ -92,3 +110,6 @@ class Pedido(models.Model):
 
     def __str__(self):
         return f'Pedido {self.IdPedido} - Cliente: {self.NombreyApellidoCliente}'
+
+    class Meta:
+        db_table = 'tesisApp_pedido_test'  # Nombre de la tabla en la base de datos
