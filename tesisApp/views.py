@@ -7,6 +7,8 @@ from .authentication import authenticate_by_dni
 from django.contrib.auth.models import User
 from. import forms
 from .forms import ModificarPrecioForm
+from django.contrib import messages
+
 
 
 
@@ -28,11 +30,18 @@ def login_view(request):
         
         if user:
             auth_login(request, user)
-            return redirect('ingresaste')
+            return redirect('ingresaste') #modificar esto
         else:
+            # print('-------ERROR EN EL INICIO DE SESION-----------')
+            # message = "Error: Las credenciales son inválidas"
+            # #return render(request, 'login.html', {'message': message})
+            # return redirect('home')
+
+            print('-------ERROR EN EL INICIO DE SESION-----------')
             message = "Error: Las credenciales son inválidas"
-            return render(request, 'login.html', {'message': message})
-    return render(request, 'login.html')
+            return render(request, 'tesisApp/login.html', {'message': message})
+
+    return render(request, 'tesisApp/login.html')
 
 
 def usuariocreado(request):
@@ -140,11 +149,9 @@ def asignacionModulos(request):
 
 
 # def calendarioPedidos(request):
-#     # Obtener todos los pedidos de la base de datos
     
-
-#     #pedidos = Pedido.objects.all()
-#     pedidos = Pedido.objects.filter(FechaDeEntrega='2024-01-03')
+#     pedidos = Pedido.objects.all()
+#     #pedidos = Pedido.objects.filter(FechaDeEntrega='2024-01-04')
 
 #     if pedidos:
 #         # Imprimir información sobre los pedidos en la consola
@@ -162,8 +169,6 @@ def calendarioPedidos(request):
         # Obtener la fecha del cuerpo de la solicitud
         formattedDate = request.POST.get('fecha', None)
 
-        
-        
         if formattedDate:
             # Realizar operaciones con la fecha
             pedidos = Pedido.objects.filter(FechaDeEntrega=formattedDate)
@@ -191,26 +196,28 @@ def informes(request):
     context = {}
     return render(request, "tesisApp/informes.html")
 
-##def crear_pedido(request):
-    IdPedido = models.AutoField(primary_key=True)
-    # Obtén el cliente, obra y otros datos necesarios para crear el pedido
-    cliente = Cliente.objects.get(id=1)  # Reemplaza con la lógica adecuada para obtener el cliente
-    obra = Obra.objects.get(id=1)  # Reemplaza con la lógica adecuada para obtener la obra
-    cantidad_m3 = 5  # Ejemplo de cantidad_m3, reemplaza con el valor adecuado
 
-    # Crea una instancia de Pedido con el estado 'Pendiente'
-    pedido = Pedido(
-        DNICliente=cliente,
-        IdObra=obra,
-        CantidadM3=cantidad_m3,
-        EstadoPedido='Pendiente'  # Puedes configurar el estado deseado aquí
-    )
+# def crear_pedido(request):
+#     IdPedido = models.AutoField(primary_key=True)
 
-    # Realiza cualquier otro cálculo necesario en función de los datos proporcionados
-    # Por ejemplo, puedes calcular NombreyApellidoCliente y ValorTotal aquí
+#     # Obtén el cliente, obra y otros datos necesarios para crear el pedido
+#     cliente = Cliente.objects.get(id=1)  # Reemplaza con la lógica adecuada para obtener el cliente
+#     obra = Obra.objects.get(id=1)  # Reemplaza con la lógica adecuada para obtener la obra
+#     cantidad_m3 = 5  # Ejemplo de cantidad_m3, reemplaza con el valor adecuado
 
-    pedido.save()  # Guarda el objeto Pedido en la base de datos
+#     # Crea una instancia de Pedido con el estado 'Pendiente'
+#     pedido = Pedido(
+#         DNICliente=cliente,
+#         IdObra=obra,
+#         CantidadM3=cantidad_m3,
+#         EstadoPedido='Pendiente'  # Puedes configurar el estado deseado aquí
+#     )
 
-    return redirect('detalle_pedido', pedido_id=pedido.IdPedido)  # Redirige a la vista de detalle del pedido
+#     # Realiza cualquier otro cálculo necesario en función de los datos proporcionados
+#     # Por ejemplo, puedes calcular NombreyApellidoCliente y ValorTotal aquí
+
+#     pedido.save()  # Guarda el objeto Pedido en la base de datos
+
+#     return redirect('detalle_pedido', pedido_id=pedido.IdPedido)  # Redirige a la vista de detalle del pedido
 
 

@@ -96,23 +96,28 @@ body {
     cursor: pointer;
     border: 0;
     padding: 1rem 1.5rem;
+    outline:none;
 }
 
 .toggle-btn i {
     font-size: 1.5rem;
     color: #FFF;
+    outline:none;
 }
 
 .sidebar-logo {
     margin: auto 0;
     transition: all .7s ease-out;
+    outline:none;
 }
+
 
 .sidebar-logo a {
     color: #FFF;
     font-size: 1.15rem;
     font-weight: 600;
     transition: all .10s ease-out;
+    outline:none;
 }
 
 
@@ -213,10 +218,12 @@ a.sidebar-link:hover {
     border: 0;
     padding: 1rem 1.5rem;
     transition: transform 0.7s ease-in-out; /* Agrega la propiedad de transición */
+    outline: none;
 }
 
 .toggle-btn.rotated {
     transform: rotate(-90deg); /* Aplica la rotación */
+    outline: none;
 }
 
 
@@ -488,7 +495,6 @@ a.sidebar-link:hover {
 
 
 
-
 /* ========== CALENDAR ========== */
 
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
@@ -565,8 +571,8 @@ a.sidebar-link:hover {
   }
   
   .current-day {
-    background-color: rgb(156, 0, 0);
-    color: #f8f7fa;
+    background-color:white;
+    color: #19181a;
     border-radius: 15px;
     font-weight: 700;
     transition: 0.5s;
@@ -582,8 +588,8 @@ a.sidebar-link:hover {
   .month-day:hover,
   .btn-cal:hover {
     border-radius: 15px;
-    background-color: #f8f7fa;
-    color: rgb(156, 0, 0);
+    background-color: white;
+    color:  rgb(156, 0, 0);
     transition: 0.1s;
     cursor: pointer;
     box-shadow: inset 0px 0px 0px 1.5px rgb(156, 0, 0);
@@ -593,8 +599,8 @@ a.sidebar-link:hover {
   .month-day:focus,
   .btn-cal:focus {
     border-radius: 15px;
-    background-color: rgb(156, 0, 0);
-    color: #f8f7fa;
+    background-color: white;
+    color: rgb(156, 0, 0);
   }
   
   .goto-buttons {
@@ -648,14 +654,13 @@ a.sidebar-link:hover {
   
   .month-day.selected-day {
     border-radius: 15px;
-    background-color: #f8f7fa;
-    color: rgb(156, 0, 0);
+    background-color:rgb(156, 0, 0);
+    color: white;
     transition: 0.1s;
     cursor: pointer;
     box-shadow: inset 0px 0px 0px 1.5px rgb(156, 0, 0);
     
   }
-
 
   .tablaCalendar {
     width: 100%;
@@ -731,4 +736,12 @@ a.sidebar-link:hover {
     justify-content: center;
     flex-direction: column;
     width: 100%;
+  }
+  
+
+  .aumentar{
+    transition: transform 0.3s ease; 
+  }
+  .aumentar:hover{
+    transform: scale(1.05); 
   }

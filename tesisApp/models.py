@@ -113,3 +113,4 @@ class Pedido(models.Model):
 
     class Meta:
         db_table = 'tesisApp_pedido_test'  # Nombre de la tabla en la base de datos
+
