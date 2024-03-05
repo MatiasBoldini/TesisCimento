@@ -20,20 +20,24 @@
                     <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
                         <div class="form-group mb-4">
-                            <input type="text" name="dni" class="form-control" placeholder="DNI">
+                            <input type="text" name="dni" class="form-control" placeholder="Ingrese DNI...">
                         </div>
                         <div class="form-group mb-4">
-                            <input type="password" name="password" class="form-control" placeholder="Contraseña">
+                            <input type="password" name="password" class="form-control" placeholder="Ingrese contraseña...">
                         </div>
+
+                        {% if message %}
+                            <!-- <h1 style="color: red;">{{ message }}</h1> -->
+                            <div class="form-group mb-4">
+                                <i href="#" style="color: red;">{{ message }}</i>
+                            </div>
+                        {% endif %}
+
                         <div class="form-group mb-4">
                             <a href="#">¿Olvidaste tu contraseña?</a>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block btn-inicio aumentar">Iniciar Sesión</button>
                     </form>
-
-                    {% if message %}
-                        <h1 style="color: red;">{{ message }}</h1>
-                    {% endif %}
 
 
                 </div>

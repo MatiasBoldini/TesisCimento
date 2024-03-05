@@ -16,7 +16,7 @@ hamBurger.addEventListener("click", function () {
   if (logoExpanded) {
     // Logo expandido
     logoElement.style.transition = 'margin-left 0.7s ease-in-out';
-    logoElement.style.marginLeft = '170px';
+    logoElement.style.marginLeft = '0';
   } else {
     // Logo en posición original
     logoElement.style.transition = 'margin-left 0.7s ease-in-out';

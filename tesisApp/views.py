@@ -38,7 +38,7 @@ def login_view(request):
             # return redirect('home')
 
             print('-------ERROR EN EL INICIO DE SESION-----------')
-            message = "Error: Las credenciales son inválidas"
+            message = "Los datos ingresados son incorrectos."
             return render(request, 'tesisApp/login.html', {'message': message})
 
     return render(request, 'tesisApp/login.html')
