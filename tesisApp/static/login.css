@@ -745,3 +745,28 @@ a.sidebar-link:hover {
   .aumentar:hover{
     transform: scale(1.05); 
   }
+
+
+
+
+/* ========= INFORMES ============ */
+
+
+.recuadro {
+    color: white;
+}
+
+.recuadrop {
+    color: white;
+}
+
+
+.nav-link {
+    width: calc(100% / 3); /* Divide el ancho igualmente entre los tres botones */
+    border-radius: 0; /* Elimina los bordes redondeados */
+    border-right: none; /* Elimina el borde derecho */
+}
+
+.nav-link:last-child {
+    border-right: 1px solid rgba(0, 0, 0, 0.1); /* Añade un borde derecho al último botón */
+}
