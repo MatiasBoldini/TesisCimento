@@ -16,7 +16,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <form method="post" action="">
+                        <form method="post" action="{% url 'verificarCod' %}">
+                            {% csrf_token %}
                             <div class="input-container d-flex justify-content-between">
                                 <div class="input-wrapper">
                                     <input type="text" name="input1" class="form-control custom-input" inputmode="numeric" pattern="[0-9]" minlength="1" maxlength="1" oninput="moveToNextInput(this, 'input2')" required>
@@ -32,8 +33,15 @@
                                 </div>
                             </div>
                             <div class="mt-3">
+                                {% if message %}
+                                    <!-- <h1 style="color: red;">{{ message }}</h1> -->
+                                    <div class="form-group mb-4">
+                                        <i href="#" style="color: red;margin-top: 20px; text-align: center;">{{ message }}</i>
+                                    </div>
+                                {% endif %}
                                 <p id="codigo-incorrecto" style="display: none; color: red;">Código incorrecto</p>
-                                <button type="submit" class="btn btn-primary btn-block btn-inicio">Aceptar</button>
+                                <button type="submit" class="btn btn-primary btn-block btn-inicio aumentar" style="margin-top: 20px;">Aceptar</button>
+                                
                             </div>
                         </form>
                     </div>

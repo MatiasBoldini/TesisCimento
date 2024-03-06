@@ -15,11 +15,11 @@ hamBurger.addEventListener("click", function () {
 
   if (logoExpanded) {
     // Logo expandido
-    logoElement.style.transition = 'margin-left 0.7s ease-in-out';
+    logoElement.style.transition = 'margin-left 0.5s ease-in-out';
     logoElement.style.marginLeft = '0';
   } else {
     // Logo en posición original
-    logoElement.style.transition = 'margin-left 0.7s ease-in-out';
+    logoElement.style.transition = 'margin-left 0.5s ease-in-out';
     logoElement.style.marginLeft = '0px';
   }
 });
@@ -44,7 +44,7 @@ toggleBtn.addEventListener('click', function() {
       body.style.overflow = "hidden"
     } else {
       // Si el sidebar está cerrado, ocultarlo
-      parte2.style.left = '-100%';
+      parte2.style.left = '-50%';
       parte2.style.transition = 'left 0.7s ease-in-out';
       body.style.overflow= "visible"
     }

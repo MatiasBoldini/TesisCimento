@@ -15,16 +15,19 @@
                         <br>
                     </div>
                     <div class="col-12 text-center">                       
-                        <h2 style="color: white; font-size: 18px; font-family: Poppins, sans-serif;">Te enviaremos las instrucciones con lo que debes hacer.</h2>
+                        <h2 style="color: white; font-size: 18px; font-family: Poppins, sans-serif;">Te enviaremos un email con un código de verificación que deberás ingresar en la próxima pantalla.</h2>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <form method="post" action="">
+                        <form method="post" action="{% url 'enviarCod' %}">
+                            {% csrf_token %}
                             <div class="form-group mb-4">
                                 <input type="email" name="email" class="form-control" placeholder="Correo electrónico" required>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block btn-inicio">Continuar</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-inicio aumentar">Generar y enviar código</button>
+                            <a href="/login" class="btn btn-primary btn-block btn-modificar aumentar" style="padding-top:10px ;">Volver</a>
+
                         </form>
                     </div>
                 </div>

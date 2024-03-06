@@ -7,7 +7,12 @@ from .authentication import authenticate_by_dni
 from django.contrib.auth.models import User
 from. import forms
 from .forms import ModificarPrecioForm
-from django.contrib import messages
+
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from django.shortcuts import render
+import random
 
 
 
@@ -118,17 +123,111 @@ def modificar_precio(request, IdHormigon=None):
     return render(request, 'tesisApp/cambioprecio.html', {'form': form, 'hormigon': hormigon, 'exito': exito})
 
 
+
+
+
+
+
+
 def correRec(request):
     context = {}
     return render(request, "tesisApp/correoRec.html", context)
+
+    
+
+def generar_codigo_verificacion():
+    # Generar un código aleatorio de 4 dígitos
+    return ''.join(str(random.randint(0, 9)) for _ in range(4))
+
+
+def enviar_email(email, codigo):
+    # Configuración del servidor SMTP de Gmail
+    servidor_smtp = 'smtp.gmail.com'
+    puerto = 587
+    usuario = 'testnodemailer112@gmail.com'
+    clave = 'gbyz hjcd qdde tksf'
+
+    # Crear mensaje MIME
+    mensaje = MIMEMultipart()
+    mensaje['From'] = 'testnodemailer112@gmail.com'
+    mensaje['To'] = email
+    mensaje['Subject'] = 'Código de Recuperación | Hormigones Cimento'
+    cuerpo = f'Su código de recuperación de contraseña para la web de Hormigones Cimento es: {codigo}'
+    mensaje.attach(MIMEText(cuerpo, 'plain'))
+
+    try:
+        # Establecer conexión con el servidor SMTP y enviar el mensaje
+        with smtplib.SMTP(servidor_smtp, puerto) as servidor:
+            servidor.starttls()
+            servidor.login(usuario, clave)
+            servidor.send_message(mensaje)
+
+        return True
+
+    except smtplib.SMTPException as e:
+        print(f'Error al enviar el correo: {e}')
+        return False
+
+
+
+def enviarCod(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+
+        # Generar un código de verificación aleatorio
+        codigo_verificacion = generar_codigo_verificacion()
+
+        # Almacenar el código en algún lugar (puedes usar una base de datos o sesión)
+        request.session['codigo_verificacion'] = codigo_verificacion
+
+        # Enviar el código de verificación por correo electrónico
+        # Para las pruebas, comentar la linea y el 'if' siguiente
+        exito = enviar_email(email, codigo_verificacion)
+
+
+        if exito: #Si exito es True
+            return render(request, 'tesisApp/codigoVerificacion.html', {'email': email})
+        else:
+            return render(request, 'tesisApp/correoRec.html') 
+
+    else:
+        return redirect('home')
+
+
+
+def verificarCod(request):
+    if request.method == 'POST':
+        letra1 = request.POST.get('input1')
+        letra2 = request.POST.get('input2')
+        letra3 = request.POST.get('input3')
+        letra4 = request.POST.get('input4')
+
+        codigoRecibido = letra1 + letra2 + letra3 + letra4
+
+        # Obtener el código de verificación almacenado en la sesión
+        codigo_verificacion_guardado = request.session.get('codigo_verificacion')
+
+        # Comparar el código ingresado con el código almacenado
+        if codigo_verificacion_guardado and codigoRecibido == codigo_verificacion_guardado:
+            del request.session['codigo_verificacion'] 
+            return render(request, 'tesisApp/nuevaContrasena.html')
+        else:
+            mensaje = 'El código de recuperación ingresado es incorrecto'
+            return render(request, 'tesisApp/codigoVerificacion.html', {'message': mensaje})
+    else:
+        return redirect('home')
+
+
+
+
+
+
+
 
 def nuevaContrasena(request):
     context = {}
     return render(request, "tesisApp/nuevaContrasena.html", context)
 
-def codigoVerificacion(request):
-    context = {}
-    return render(request, "tesisApp/codigoVerificacion.html", context)
 
 def cargaPedidos(request):
     context= {}

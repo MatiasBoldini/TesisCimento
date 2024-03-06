@@ -12,13 +12,15 @@ urlpatterns = [
     path('cambioprecio/<int:IdHormigon>/', views.modificar_precio, name='cambioprecio'),
     path('correoRec/', views.correRec, name='correoRec'),
     path('nuevaContrasena', views.nuevaContrasena, name='nuevaContrasena'),
-    path('codigoVerificacion', views.codigoVerificacion, name='codigoVerificacion'),
+    # path('codigoVerificacion', views.codigoVerificacion, name='codigoVerificacion'),
     path('cargaPedidos', views.cargaPedidos, name='cargaPedidos'),
     path('consulta', views.consulta, name='consulta'),
     path('ubicacionPedido', views.ubicacionPedido, name="ubicacionPedido"),
     path('asignacionModulos', views.asignacionModulos, name="asignacionModulos"),
     path('calendarioPedidos', views.calendarioPedidos, name="calendarioPedidos"),
-    path('informes', views.informes, name="informes")
+    path('informes', views.informes, name="informes"),
+    path('enviarCod', views.enviarCod, name='enviarCod'),
+    path('verificarCod', views.verificarCod, name='verificarCod'),
 
 ]
 
