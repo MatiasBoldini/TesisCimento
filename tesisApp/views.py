@@ -37,11 +37,6 @@ def login_view(request):
             auth_login(request, user)
             return redirect('ingresaste') #modificar esto
         else:
-            # print('-------ERROR EN EL INICIO DE SESION-----------')
-            # message = "Error: Las credenciales son inválidas"
-            # #return render(request, 'login.html', {'message': message})
-            # return redirect('home')
-
             print('-------ERROR EN EL INICIO DE SESION-----------')
             message = "Los datos ingresados son incorrectos."
             return render(request, 'tesisApp/login.html', {'message': message})
@@ -68,7 +63,7 @@ def crear_usuario_empleado(request):
             telefono = request.POST.get('telefono')
 
          
-            nuevo_usuario = User.objects.create_user(username=username, password=password)
+            nuevo_usuario = User.objects.create_user(username=username, password=password, email=email)
 
           
             if nuevo_usuario:
@@ -129,7 +124,7 @@ def modificar_precio(request, IdHormigon=None):
 
 
 
-def correRec(request):
+def correoRec(request):
     context = {}
     return render(request, "tesisApp/correoRec.html", context)
 
@@ -174,18 +169,24 @@ def enviarCod(request):
     if request.method == 'POST':
         email = request.POST.get('email')
 
+        # Almacenar el email en una variable de sesion
+        request.session['email_verificacion'] = email
+
         # Generar un código de verificación aleatorio
         codigo_verificacion = generar_codigo_verificacion()
 
-        # Almacenar el código en algún lugar (puedes usar una base de datos o sesión)
+        print(codigo_verificacion)
+
+        # Almacenar el código en una variable de sesion
         request.session['codigo_verificacion'] = codigo_verificacion
 
         # Enviar el código de verificación por correo electrónico
-        # Para las pruebas, comentar la linea y el 'if' siguiente
+        
+        #return render(request, 'tesisApp/codigoVerificacion.html', {'email': email})
+
+        # Para las pruebas, comentar las lineas siguientes
         exito = enviar_email(email, codigo_verificacion)
-
-
-        if exito: #Si exito es True
+        if exito: #Si exito es True (el mail se envia correctamente)
             return render(request, 'tesisApp/codigoVerificacion.html', {'email': email})
         else:
             return render(request, 'tesisApp/correoRec.html') 
@@ -220,6 +221,29 @@ def verificarCod(request):
 
 
 
+def actualizarPass(request):
+    if request.method == 'POST':
+
+        contra1 = request.POST.get('password')
+        contra2 = request.POST.get('password-repeat')
+
+        if contra1 == contra2:
+            email_verificacion_guardado = request.session.get('email_verificacion')
+            usuario = User.objects.get(email=email_verificacion_guardado)
+
+            nueva_contrasena = contra1
+            usuario.set_password(nueva_contrasena)
+            usuario.save()    
+
+            print(f'el email al que se le va a cambiar la contraseña es {email_verificacion_guardado}')
+            del request.session['email_verificacion']
+            return redirect('ingresaste')
+        else:
+            mensaje = 'Las contraseñas no coinciden. Por favor verifique los datos ingresados.'
+            return render(request, 'tesisApp/nuevaContrasena.html', {'message': mensaje})
+            
+    else:
+        return redirect('home')
 
 
 
