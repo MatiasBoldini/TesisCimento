@@ -11,50 +11,46 @@
             <section class="container mt-custom mb-4"> <!-- Mantenemos la clase mt-custom -->
                 <div class="row mb-2"> <!-- Reducimos el margen para un ajuste más preciso -->
                     <div class="col-12 text-center">
-                        <h1 class="titulo-principal">Calendario de Pedidos</h1>
+                        <h1 class="titulo-principal">Calendario de pedidos</h1>
                     </div>
                 </div>
-            
-            
-            <div class="contenedor-calendar">
-                <div class="card">
-                    <div class="calendar-toolbar">
-                        <button class="prev month-btn">
-                        <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <div class="current-month"></div>
-                        <button class="next month-btn">
-                        <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-                    <div class="calendar">
-                        <div class="weekdays">
-                        <div class="weekday-name">Dom</div>
-                        <div class="weekday-name">Lun</div>
-                        <div class="weekday-name">Mar</div>
-                        <div class="weekday-name">Mie</div>
-                        <div class="weekday-name">Jue</div>
-                        <div class="weekday-name">Vie</div>
-                        <div class="weekday-name">Sab</div>
-                        </div>
-                        <div class="calendar-days"></div>
-                    </div>
-                    <div class="goto-buttons">
-                        <button type="button" class="btn-cal prev-year" >Año ant.</button>
-                        <button type="button" class="btn-cal today" id="todayBtn">Hoy</button>
-                        <button type="button" class="btn-cal next-year">Año sig.</button>
-                    </div>
-                    </div>
-            </div>
 
-           
+                <div class="container mt-3">
+                <div >
+                    <label for="meses" style="color: white;">Selecciona un mes:</label>
+                    <select id="mesSeleccionado" name="meses" class="form-control">
+                        <option value="0" disabled selected>Seleccionar...</option>
+                        <option value="1">Enero</option>
+                        <option value="2">Febrero</option>
+                        <option value="3">Marzo</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Mayo</option>
+                        <option value="6">Junio</option>
+                        <option value="7">Julio</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Septiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                    <!-- <button id="botonMostrar" class="btn btn-primary">Mostrar Pedidos</button> -->
+                </div>
+
+                <div id="calendario" class="mt-2"></div>
+            </div>
 
 
             <div class="contenedor-todo">
 
                 <div class="grilla">            
                   <div class="contenedor-tabla">
-                
+
+                    {% if fecha %}
+                        <h1 style="color: white;">Fecha seleccionada: {{ fecha }} </h1>     
+                    {% endif %}
+
+
+                    
                     <table id="tabla" class="tablaCalendar">
                         <thead>
                             <tr>
@@ -66,48 +62,48 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <!-- <tr>
-                            <td>Agustin Mansilla</td>
-                            <td>19:30hs</td>
-                            <td>M3D</td>
-                            <td>400</td>
-                        </tr>
-                        <tr>
-                            <td>Agustin Mansilla</td>
-                            <td>21:30hs</td>
-                            <td>A7X</td>
-                            <td>120</td>
-                        </tr>
-                        <tr>
-                            <td>Fabrizio Alvarez</td>
-                            <td>12:10hs</td>
-                            <td>OOA</td>
-                            <td>890</td>
-                        </tr>-->
-                        <!-- <tr>
-                            <td colspan="4">No hay pedidos disponibles</td> 
-                        </tr>  -->
-
-                        {% for pedido in pedidos %}
+                        {% csrf_token %}
+                        {% if pedidos %}
+                            {% for pedido in pedidos %}
+                                <tr>
+                                    <td>{{ pedido.IdPedido }}</td>
+                                    <td>{{ pedido.DNICliente }}</td>
+                                    <td>{{ pedido.FechaDeEntrega }}</td>
+                                    <td>{{ pedido.CantidadM3 }}</td>
+                                    <td>{{ pedido.EstadoPedido }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
                             <tr>
-                                <td>{{ pedido.IdPedido }}</td>
-                                <td>{{ pedido.DNICliente }}</td>
-                                <td>{{ pedido.FechaDeEntrega }}</td>
-                                <td>{{ pedido.CantidadM3 }}</td>
-                                <td>{{ pedido.EstadoPedido }}</td>
+                                <td colspan="5">No hay pedidos disponibles.</td>
                             </tr>
-                        {% endfor %}
+                        {% endif %}
                         </tbody>
                     </table>
                   </div>
                 </div>
             
-            </div>
+            </div> 
 
         </section>
 
 
+        <script>
+            var fechasDeEntrega = {{ fechas_de_entrega|safe }};
+    
+            // Agregar evento de cambio al dropdown
+            document.getElementById('mesSeleccionado').addEventListener('change', onMesSeleccionadoChange);
 
+
+            function onMesSeleccionadoChange() {
+            const mesSeleccionado = document.getElementById('mesSeleccionado').value;
+        
+                
+            mostrarFechasEnCalendario(parseInt(mesSeleccionado), fechasDeEntrega);
+
+        }
+            
+        </script>
 
 
 

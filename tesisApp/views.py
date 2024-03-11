@@ -13,7 +13,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from django.shortcuts import render
 import random
-
+from datetime import datetime
+import json
 
 
 
@@ -271,46 +272,54 @@ def asignacionModulos(request):
 
 
 
+
+
 # def calendarioPedidos(request):
-    
-#     pedidos = Pedido.objects.all()
-#     #pedidos = Pedido.objects.filter(FechaDeEntrega='2024-01-04')
 
-#     if pedidos:
-#         # Imprimir información sobre los pedidos en la consola
-#         print(f'--- Hay pedidos disponibles. --- \n' )
-        
+#     if request.method == 'POST':
+
+#         formattedDate = request.POST.get('fecha')
+
+#         if formattedDate:
+#             pedidos = Pedido.objects.filter(FechaDeEntrega=formattedDate)
+#             return render(request, 'tesisApp/calendarioPedidos.html', {'pedidos': pedidos,  'fecha': formattedDate})
+#         else:
+#             # Si no se proporciona la fecha, devolver un error
+#             print('No hay ninguna fecha seleccionada')
+#             return render(request, 'tesisApp/calendarioPedidos.html', {'pedidos': ''})
 #     else:
-#         print(f'--- No hay pedidos disponibles. --- \n' )
-#     # Renderizar la plantilla 'grilla_pedidos.html' con la lista de pedidos
-#     return render(request, 'tesisApp/calendarioPedidos.html', {'pedidos': pedidos})
+#         print('La solicitud no es POST')
+#         return render(request, 'tesisApp/calendarioPedidos.html', {'pedidos': ''})
 
+
+
+
+
+# def calendarioPedidos(request):
+#     # Obtener todos los pedidos
+#     pedidos = Pedido.objects.all()
+
+#     # Obtener todas las fechas de entrega de los pedidos y formatearlas
+#     fechas_de_entrega_formateadas = [pedido.FechaDeEntrega.strftime('%Y-%m-%d') for pedido in pedidos]
+
+#     # Puedes pasar las fechas formateadas a tu plantilla
+#     return render(request, 'tesisApp/calendarioPedidos.html', {'fechas_de_entrega': fechas_de_entrega_formateadas})
 
 
 def calendarioPedidos(request):
-    if request.method == 'POST':
-        # Obtener la fecha del cuerpo de la solicitud
-        formattedDate = request.POST.get('fecha', None)
+    # Obtener todos los pedidos
+    pedidos = Pedido.objects.all()
 
-        if formattedDate:
-            # Realizar operaciones con la fecha
-            pedidos = Pedido.objects.filter(FechaDeEntrega=formattedDate)
+    # Obtener todas las fechas de entrega de los pedidos y formatearlas
+    fechas_de_entrega_formateadas = [pedido.FechaDeEntrega.strftime('%Y-%m-%d') for pedido in pedidos]
 
-            if pedidos:
-                # Imprimir información sobre los pedidos en la consola del servidor
-                print(f'--- Hay pedidos disponibles para la fecha {formattedDate}. --- \n')
-            else:
-                print(f'--- No hay pedidos disponibles para la fecha {formattedDate}. --- \n')
+    # Serializar las fechas como una lista JSON
+    fechas_de_entrega_json = json.dumps(fechas_de_entrega_formateadas)
 
-            
-            return render(request, 'tesisApp/calendarioPedidos.html', {'pedidos': pedidos})
-        else:
-            # Si no se proporciona la fecha, devolver un error
-            print('Error en la seleccion de fecha')
-    else:
-        print('Error en la seleccion de fecha')
-        pedidos = Pedido.objects.all()
-        return render(request, 'tesisApp/calendarioPedidos.html', {'pedidos': pedidos})
+    # Puedes pasar las fechas serializadas a tu plantilla
+    return render(request, 'tesisApp/calendarioPedidos.html', {'fechas_de_entrega': fechas_de_entrega_json})
+    
+
 
 
 
@@ -318,6 +327,13 @@ def calendarioPedidos(request):
 def informes(request):
     context = {}
     return render(request, "tesisApp/informes.html")
+
+
+
+
+
+
+
 
 
 # def crear_pedido(request):
