@@ -109,8 +109,7 @@ class Pedido(models.Model):
         return valor_total
 
     def __str__(self):
-        return f'Pedido {self.IdPedido} - Cliente: {self.DNICliente} - Obra: {self.IdObra} - Fecha de Entrega: {self.FechaDeEntrega} - Cantidad M3: {self.CantidadM3} - Estado: {self.EstadoPedido}'
-
+        return f'Pedido {self.IdPedido} - Cliente: {self.NombreyApellidoCliente}'
 
     class Meta:
         db_table = 'tesisApp_pedido_test'  # Nombre de la tabla en la base de datos

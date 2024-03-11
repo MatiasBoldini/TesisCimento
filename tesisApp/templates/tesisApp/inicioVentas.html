@@ -1,0 +1,67 @@
+{% extends './layout.html' %}
+
+{% block title %}
+    Pagina Principal de Activades del Usuario
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-4">
+        <div class="col-12 col-lg-8">
+            <section class="mt-custom mb-4">
+                <div class="row mb-4 justify-content-center">
+                    <div class="col-12 text-center">
+                        <!-- <img src="../../static/captura2.png" alt="" class="img-fluid"> -->
+                        <h1 class="titulo-principales">HORMIGONES CIMENTO</h1>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
+                            <div class="col-md-4">
+                                <a href="{% url 'cambioprecio_sin_id' %}" class="card-link">
+                                    <div class="card custom-card bg-custom">
+                                        <img src="../../static/icons/etiqueta-del-precio.png" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <hr class="linea">
+                                            <h5 class="card-title">ACTUALIZACIÓN DE PRECIOS</h5>
+                                            <p class="card-text">Ajusta el valor según el tipo de hormigón de manera eficiente y precisa.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- Repite este bloque para las otras tarjetas -->
+                            <div class="col-md-4">
+                                <a href="{% url 'cargaPedidos' %}" class="card-link">
+                                    <div class="card custom-card bg-custom">
+                                        <img src="../../static/icons/entrega-de-pedidos.png" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <hr class="linea">
+                                            <h5 class="card-title">CARGA DE PEDIDOS</h5>
+                                            <p class="card-text">Registra los pedidos y ordenes según las especificaciones del cliente.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{% url 'calendarioPedidos' %}" class="card-link">
+                                    <div class="card custom-card bg-custom">
+                                        <img src="../../static/icons/calendario.png" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <hr class="linea">
+                                            <h5 class="card-title">CALENDARIO DE PEDIDOS</h5>
+                                            <p class="card-text">Visualiza los pedidos programados para el dia, mes o año seleccionado.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>              
+            </section>
+        </div>    
+    </div>
+</div>
+
+{% endblock %}
