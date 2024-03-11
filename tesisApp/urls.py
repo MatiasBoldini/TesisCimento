@@ -12,7 +12,6 @@ urlpatterns = [
     path('cambioprecio/<int:IdHormigon>/', views.modificar_precio, name='cambioprecio'),
     path('correoRec/', views.correoRec, name='correoRec'),
     path('nuevaContrasena', views.nuevaContrasena, name='nuevaContrasena'),
-    # path('codigoVerificacion', views.codigoVerificacion, name='codigoVerificacion'),
     path('cargaPedidos', views.cargaPedidos, name='cargaPedidos'),
     path('consulta', views.consulta, name='consulta'),
     path('ubicacionPedido', views.ubicacionPedido, name="ubicacionPedido"),

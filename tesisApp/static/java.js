@@ -126,98 +126,98 @@ function iniciarMap(){
 
 // ========= CALENDAR =============
 
-let currentMonth = document.querySelector(".current-month");
-let calendarDays = document.querySelector(".calendar-days");
-let today = new Date();
-let date = new Date();
+// let currentMonth = document.querySelector(".current-month");
+// let calendarDays = document.querySelector(".calendar-days");
+// let today = new Date();
+// let date = new Date();
 
 
-currentMonth.textContent = date.toLocaleDateString("en-EN", {month:'long', year:'numeric'});
-today.setHours(0,0,0,0);
-renderCalendar();
+// currentMonth.textContent = date.toLocaleDateString("en-EN", {month:'long', year:'numeric'});
+// today.setHours(0,0,0,0);
+// renderCalendar();
 
-function renderCalendar() {
-    const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
-    const totalMonthDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-    const startWeekDay = new Date(date.getFullYear(), date.getMonth(), 0).getDay();
+// function renderCalendar() {
+//     const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
+//     const totalMonthDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+//     const startWeekDay = new Date(date.getFullYear(), date.getMonth(), 0).getDay();
 
-    calendarDays.innerHTML = "";
+//     calendarDays.innerHTML = "";
 
-    let totalCalendarDay = 6 * 7;
-    for (let i = 0; i < totalCalendarDay; i++) {
-        let day = i - startWeekDay;
+//     let totalCalendarDay = 6 * 7;
+//     for (let i = 0; i < totalCalendarDay; i++) {
+//         let day = i - startWeekDay;
 
-        if (i <= startWeekDay) {
-            // adding previous month days
-            calendarDays.innerHTML += `<div class="prev-month">${prevLastDay - i}</div>`;
-        } else if (i <= startWeekDay + totalMonthDay) {
-            // adding this month days
-            date.setDate(day);
-            date.setHours(0, 0, 0, 0);
+//         if (i <= startWeekDay) {
+//             // adding previous month days
+//             calendarDays.innerHTML += `<div class="prev-month">${prevLastDay - i}</div>`;
+//         } else if (i <= startWeekDay + totalMonthDay) {
+//             // adding this month days
+//             date.setDate(day);
+//             date.setHours(0, 0, 0, 0);
 
-            let dayClass = date.getTime() === today.getTime() ? 'current-day' : 'month-day';
-            calendarDays.innerHTML += `<div class="${dayClass}">${day}</div>`;
-        } else {
-            // adding next month days
-            calendarDays.innerHTML += `<div class="next-month">${day - totalMonthDay}</div>`;
-        }
-    }
+//             let dayClass = date.getTime() === today.getTime() ? 'current-day' : 'month-day';
+//             calendarDays.innerHTML += `<div class="${dayClass}">${day}</div>`;
+//         } else {
+//             // adding next month days
+//             calendarDays.innerHTML += `<div class="next-month">${day - totalMonthDay}</div>`;
+//         }
+//     }
 
 
 
-    addDayClickListeners();
-}
+//     addDayClickListeners();
+// }
 
-function addDayClickListeners() {
-    document.querySelectorAll(".month-day, .current-day").forEach(function (element) {
-        element.addEventListener("click", function () {
-            // Remover la clase de selección y current-day de todos los días
-            document.querySelectorAll(".month-day").forEach(function(day) {
-                day.classList.remove("selected-day");
-                day.classList.remove("current-day");
-            });
+// function addDayClickListeners() {
+//     document.querySelectorAll(".month-day, .current-day").forEach(function (element) {
+//         element.addEventListener("click", function () {
+//             // Remover la clase de selección y current-day de todos los días
+//             document.querySelectorAll(".month-day").forEach(function(day) {
+//                 day.classList.remove("selected-day");
+//                 day.classList.remove("current-day");
+//             });
 
-            // Agregar la clase de selección al día actual
-            element.classList.add("selected-day");
+//             // Agregar la clase de selección al día actual
+//             element.classList.add("selected-day");
 
             
 
-            // Obtener la fecha del día seleccionado
-            const dayOfMonth = parseInt(element.textContent);
-            const selectedDate = new Date(date.getFullYear(), date.getMonth(), dayOfMonth);
+//             // Obtener la fecha del día seleccionado
+//             const dayOfMonth = parseInt(element.textContent);
+//             const selectedDate = new Date(date.getFullYear(), date.getMonth(), dayOfMonth);
 
-            // Formatear la fecha a YYYY-MM-DD
-            const formattedDate = selectedDate.toISOString().split('T')[0];
+//             // Formatear la fecha a YYYY-MM-DD
+//             const formattedDate = selectedDate.toISOString().split('T')[0];
 
-            // Mostrar la fecha en la consola
-            console.log("Fecha seleccionada:", formattedDate);
+//             // Mostrar la fecha en la consola
+//             console.log("Fecha seleccionada:", formattedDate);
             
-            var xhr = new XMLHttpRequest();
+//             var xhr = new XMLHttpRequest();
 
-            // Configurar la solicitud con el método y la URL
-            xhr.open('POST', 'calendarioPedidos', true);
+//             // Configurar la solicitud con el método y la URL
+//             xhr.open('POST', 'calendarioPedidos', true);
             
-            // Configurar los encabezados necesarios (incluyendo CSRF token)
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
-            // Configurar la función de devolución de llamada para manejar la respuesta
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    // Manejar la respuesta (puedes hacer algo si es necesario)
-                    console.log("Datos enviados");
-                } else {
-                    // Manejar errores
-                    console.error("Error en la solicitud:", xhr.statusText);
-                }
-            };
+//             // Configurar los encabezados necesarios (incluyendo CSRF token)
+//             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+//             xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+//             // Configurar la función de devolución de llamada para manejar la respuesta
+//             xhr.onload = function () {
+//                 if (xhr.status >= 200 && xhr.status < 300) {
+//                     // Manejar la respuesta (puedes hacer algo si es necesario)
+//                     console.log("Datos enviados");
+//                 } else {
+//                     // Manejar errores
+//                     console.error("Error en la solicitud:", xhr.statusText);
+//                 }
+//             };
 
-            // Enviar la solicitud con los datos del cuerpo
-            xhr.send('fecha=' + formattedDate);
+//             // Enviar la solicitud con los datos del cuerpo
+//             xhr.send('fecha=' + formattedDate);
 
 
-        });
-    });
-}
+//         });
+//     });
+// }
 
 function getCookie(name) {
     let cookieValue = null;
@@ -260,36 +260,36 @@ function getCookie(name) {
 
 
 
-document.querySelectorAll(".month-day").forEach(function (element) {
-    element.addEventListener("click", function () {
-        // Remover la clase de selección de todos los días
-        document.querySelectorAll(".month-day").forEach(function(day) {
-            day.classList.remove("selected-day");
-        });
+// document.querySelectorAll(".month-day").forEach(function (element) {
+//     element.addEventListener("click", function () {
+//         // Remover la clase de selección de todos los días
+//         document.querySelectorAll(".month-day").forEach(function(day) {
+//             day.classList.remove("selected-day");
+//         });
 
-        // Agregar la clase de selección al día actual
-        element.classList.add("selected-day");
+//         // Agregar la clase de selección al día actual
+//         element.classList.add("selected-day");
 
-        // Obtener la fecha del día seleccionado
-        const dayOfMonth = parseInt(element.textContent);
-        const selectedDate = new Date(date.getFullYear(), date.getMonth(), dayOfMonth);
+//         // Obtener la fecha del día seleccionado
+//         const dayOfMonth = parseInt(element.textContent);
+//         const selectedDate = new Date(date.getFullYear(), date.getMonth(), dayOfMonth);
         
-        // Formatear la fecha a YYYY-MM-DD
-        const formattedDate = selectedDate.toISOString().split('T')[0];
+//         // Formatear la fecha a YYYY-MM-DD
+//         const formattedDate = selectedDate.toISOString().split('T')[0];
 
-        // Mostrar la fecha en la consola
-        //console.log("Fecha seleccionada:", formattedDate);
-    });
-});
+//         // Mostrar la fecha en la consola
+//         //console.log("Fecha seleccionada:", formattedDate);
+//     });
+// });
 
-document.querySelectorAll(".month-btn").forEach(function (element) {
-	element.addEventListener("click", function () {
-		date = new Date(currentMonth.textContent);
-        date.setMonth(date.getMonth() + (element.classList.contains("prev") ? -1 : 1));
-		currentMonth.textContent = date.toLocaleDateString("en-US", {month:'long', year:'numeric'});
-		renderCalendar();
-	});
-});
+// document.querySelectorAll(".month-btn").forEach(function (element) {
+// 	element.addEventListener("click", function () {
+// 		date = new Date(currentMonth.textContent);
+//         date.setMonth(date.getMonth() + (element.classList.contains("prev") ? -1 : 1));
+// 		currentMonth.textContent = date.toLocaleDateString("en-US", {month:'long', year:'numeric'});
+// 		renderCalendar();
+// 	});
+// });
 
 // document.querySelectorAll(".btn").forEach(function (element) {
 // 	element.addEventListener("click", function () {
@@ -307,30 +307,113 @@ document.querySelectorAll(".month-btn").forEach(function (element) {
 // 	});
 // });
 
-document.querySelectorAll(".btn").forEach(function (element) {
-    element.addEventListener("click", function () {
-        let btnClass = element.classList;
-        date = new Date(currentMonth.textContent);
+// document.querySelectorAll(".btn").forEach(function (element) {
+//     element.addEventListener("click", function () {
+//         let btnClass = element.classList;
+//         date = new Date(currentMonth.textContent);
 
-        if (btnClass.contains("today")) {
-            date = new Date();
-            // window.location.href = "/pedidos/";
-        } else if (btnClass.contains("prev-year")) {
-            date = new Date(date.getFullYear() - 1, 0, 1);
-        } else {
-            date = new Date(date.getFullYear() + 1, 0, 1);
+//         if (btnClass.contains("today")) {
+//             date = new Date();
+//             // window.location.href = "/pedidos/";
+//         } else if (btnClass.contains("prev-year")) {
+//             date = new Date(date.getFullYear() - 1, 0, 1);
+//         } else {
+//             date = new Date(date.getFullYear() + 1, 0, 1);
+//         }
+
+//         currentMonth.textContent = date.toLocaleDateString("en-US", { month: 'long', year: 'numeric' });
+//         renderCalendar();
+//     });
+// });
+
+
+
+// document.getElementById("volverBtn").addEventListener("click", function() {
+//     window.location.href = "/pedidos/";
+// });
+
+
+// ================================================================================
+// ========================CALENDARIO VERSION 2 ========================================
+// ================================================================================
+
+
+
+  
+//     const fechas = [
+//         '2024-05-15',
+//         '2024-05-16',
+//         '2024-01-25',
+//         '2024-07-02',
+//         '2024-08-10',
+//         '2024-09-18',
+//         '2024-10-03',
+//         '2024-11-08',
+//         '2024-11-20',
+//         '2024-12-01',
+//         '2024-02-10',
+//         '2024-03-15',
+//         '2024-09-22',
+//         '2024-05-07',
+//         '2024-06-12',
+//         '2024-09-24',
+//         '2024-08-03',
+//         '2024-09-19',
+//         '2024-10-28'
+//     ];
+     
+        
+//     mostrarFechasEnCalendario(parseInt(mesSeleccionado), fechas);
+
+//   }
+
+
+
+function mostrarFechasEnCalendario(mes, fechas) {
+    const calendario = document.getElementById('calendario');
+    calendario.innerHTML = ''; // Limpiar el contenido del calendario
+
+    const mesSeleccionado = mes; // Utilizar el mes proporcionado como parámetro
+
+    const primerDiaMes = new Date(new Date().getFullYear(), mesSeleccionado - 1, 1);
+    const diaSemana = primerDiaMes.getDay();
+
+    // Agregar nombres de los días
+    const nombresDias = ['lun', 'mar', 'mie', 'jue', 'vie', 'sab', 'dom'];
+    for (const nombreDia of nombresDias) {
+        const diaNombre = document.createElement('div');
+        diaNombre.classList.add('dia-nombre');
+        diaNombre.innerText = nombreDia;
+        calendario.appendChild(diaNombre);
+    }
+
+    // Ajustar días anteriores al mes
+    const ajuste = (diaSemana === 0) ? 6 : diaSemana - 1; // Ajustar para que lunes sea 0 y domingo 6
+    for (let i = 0; i < ajuste; i++) {
+        const diaAnterior = document.createElement('div');
+        diaAnterior.classList.add('dia');
+        calendario.appendChild(diaAnterior);
+    }
+
+    // Agregar días del mes
+    const diasEnMes = new Date(new Date().getFullYear(), mesSeleccionado, 0).getDate();
+    for (let i = 1; i <= diasEnMes; i++) {
+        const dia = document.createElement('div');
+        dia.classList.add('dia');
+        dia.innerText = i;
+
+        dia.addEventListener('click', function() {
+            alert(`En la grilla deberáan aparecer los pedidos del dia ${i} del mes ${mes}`)
+        });
+
+        // Corregir la condición para resaltar en naranja el día que coincide con el mes
+        if (fechas.some(fecha => new Date(fecha).getMonth() + 1 === mesSeleccionado && i === new Date(fecha).getDate() + 1)) {
+            dia.classList.add('dia-naranja');
         }
 
-        currentMonth.textContent = date.toLocaleDateString("en-US", { month: 'long', year: 'numeric' });
-        renderCalendar();
-    });
-});
-
-
-
-document.getElementById("volverBtn").addEventListener("click", function() {
-    window.location.href = "/pedidos/";
-});
+        calendario.appendChild(dia);
+    }
+  }
 
 
 
