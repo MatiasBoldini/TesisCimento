@@ -369,51 +369,7 @@ function getCookie(name) {
 
 
 
-function mostrarFechasEnCalendario(mes, fechas) {
-    const calendario = document.getElementById('calendario');
-    calendario.innerHTML = ''; // Limpiar el contenido del calendario
 
-    const mesSeleccionado = mes; // Utilizar el mes proporcionado como parámetro
-
-    const primerDiaMes = new Date(new Date().getFullYear(), mesSeleccionado - 1, 1);
-    const diaSemana = primerDiaMes.getDay();
-
-    // Agregar nombres de los días
-    const nombresDias = ['lun', 'mar', 'mie', 'jue', 'vie', 'sab', 'dom'];
-    for (const nombreDia of nombresDias) {
-        const diaNombre = document.createElement('div');
-        diaNombre.classList.add('dia-nombre');
-        diaNombre.innerText = nombreDia;
-        calendario.appendChild(diaNombre);
-    }
-
-    // Ajustar días anteriores al mes
-    const ajuste = (diaSemana === 0) ? 6 : diaSemana - 1; // Ajustar para que lunes sea 0 y domingo 6
-    for (let i = 0; i < ajuste; i++) {
-        const diaAnterior = document.createElement('div');
-        diaAnterior.classList.add('dia');
-        calendario.appendChild(diaAnterior);
-    }
-
-    // Agregar días del mes
-    const diasEnMes = new Date(new Date().getFullYear(), mesSeleccionado, 0).getDate();
-    for (let i = 1; i <= diasEnMes; i++) {
-        const dia = document.createElement('div');
-        dia.classList.add('dia');
-        dia.innerText = i;
-
-        dia.addEventListener('click', function() {
-            alert(`En la grilla deberáan aparecer los pedidos del dia ${i} del mes ${mes}`)
-        });
-
-        // Corregir la condición para resaltar en naranja el día que coincide con el mes
-        if (fechas.some(fecha => new Date(fecha).getMonth() + 1 === mesSeleccionado && i === new Date(fecha).getDate() + 1)) {
-            dia.classList.add('dia-naranja');
-        }
-
-        calendario.appendChild(dia);
-    }
-  }
 
 
 

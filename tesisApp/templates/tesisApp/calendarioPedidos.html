@@ -8,48 +8,51 @@
     
     <div class="container d-flex justify-content-center align-items-center vh-90">
         <div class="col-lg-6 columnaCentral">
-            <section class="container mt-custom mb-4"> <!-- Mantenemos la clase mt-custom -->
-                <div class="row mb-2"> <!-- Reducimos el margen para un ajuste más preciso -->
+            <section class="container mt-custom mb-4"> 
+                <div class="row mb-2">
                     <div class="col-12 text-center">
+
                         <h1 class="titulo-principal">Calendario de pedidos</h1>
                     </div>
                 </div>
 
                 <div class="container mt-3">
-                <div >
-                    <label for="meses" style="color: white;">Selecciona un mes:</label>
-                    <select id="mesSeleccionado" name="meses" class="form-control">
-                        <option value="0" disabled selected>Seleccionar...</option>
-                        <option value="1">Enero</option>
-                        <option value="2">Febrero</option>
-                        <option value="3">Marzo</option>
-                        <option value="4">Abril</option>
-                        <option value="5">Mayo</option>
-                        <option value="6">Junio</option>
-                        <option value="7">Julio</option>
-                        <option value="8">Agosto</option>
-                        <option value="9">Septiembre</option>
-                        <option value="10">Octubre</option>
-                        <option value="11">Noviembre</option>
-                        <option value="12">Diciembre</option>
-                    </select>
-                    <!-- <button id="botonMostrar" class="btn btn-primary">Mostrar Pedidos</button> -->
+
+                    
+                           
+                    
+               
+
+                    <div >
+                        <label for="meses" style="color: white;">Selecciona un mes:</label>
+                        <select id="mesSeleccionado" name="meses" class="form-control">
+                            <!-- <option value="0" disabled selected>Seleccionar...</option> -->
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                        <!-- <button id="botonMostrar" class="btn btn-primary">Mostrar Pedidos</button> -->
+                    </div>
+
+                    <div id="calendario" class="mt-2"></div>
                 </div>
 
-                <div id="calendario" class="mt-2"></div>
-            </div>
 
+            
 
             <div class="contenedor-todo">
 
                 <div class="grilla">            
                   <div class="contenedor-tabla">
-
-                    {% if fecha %}
-                        <h1 style="color: white;">Fecha seleccionada: {{ fecha }} </h1>     
-                    {% endif %}
-
-
                     
                     <table id="tabla" class="tablaCalendar">
                         <thead>
@@ -83,25 +86,137 @@
                   </div>
                 </div>
             
+                
+
+
             </div> 
+
+           
+
+
+            <div class="formulario-oculto" style="display: none;">
+                <form action="{% url 'calendarioPedidos' %}" method="post">
+                    {% csrf_token %}
+                    <input type="date" name="inputFecha" id="inputFecha">
+                </form>
+            </div>
 
         </section>
 
 
         <script>
             var fechasDeEntrega = {{ fechas_de_entrega|safe }};
-    
+
+
+
+            
             // Agregar evento de cambio al dropdown
             document.getElementById('mesSeleccionado').addEventListener('change', onMesSeleccionadoChange);
 
 
             function onMesSeleccionadoChange() {
-            const mesSeleccionado = document.getElementById('mesSeleccionado').value;
+                const mesSeleccionado = document.getElementById('mesSeleccionado').value;
         
                 
-            mostrarFechasEnCalendario(parseInt(mesSeleccionado), fechasDeEntrega);
+                mostrarFechasEnCalendario(parseInt(mesSeleccionado), fechasDeEntrega);
 
-        }
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Mostrar el calendario para el mes de enero al cargar la página
+                mostrarCalendario();
+            });
+
+
+            
+
+            function mostrarCalendario(mes) {
+
+
+                var mesDelBack = '{{ mesDesdeBack }}';
+
+                if (mesDelBack) {
+                    mesSinFormato = parseInt(mesDelBack, 10); // Convertir a número base 10
+                    mes = mesSinFormato;
+                } else {
+                    mes = 1;
+                }
+
+
+                mostrarFechasEnCalendario(mes, fechasDeEntrega);
+                const mesSeleccionado = document.getElementById('mesSeleccionado');
+                mesSeleccionado.value = mes
+
+            }
+
+            function mostrarFechasEnCalendario(mes, fechas) {
+                const calendario = document.getElementById('calendario');
+                calendario.innerHTML = ''; // Limpiar el contenido del calendario
+
+                const inputFecha = document.getElementById('inputFecha');
+
+                const mesSeleccionado = mes; // Utilizar el mes proporcionado como parámetro
+
+                const primerDiaMes = new Date(new Date().getFullYear(), mesSeleccionado - 1, 1);
+                const diaSemana = primerDiaMes.getDay();
+
+                // Agregar nombres de los días
+                const nombresDias = ['lun', 'mar', 'mie', 'jue', 'vie', 'sab', 'dom'];
+                for (const nombreDia of nombresDias) {
+                    const diaNombre = document.createElement('div');
+                    diaNombre.classList.add('dia-nombre');
+                    diaNombre.innerText = nombreDia;
+                    calendario.appendChild(diaNombre);
+                }
+
+                // Ajustar días anteriores al mes
+                const ajuste = (diaSemana === 0) ? 6 : diaSemana - 1; // Ajustar para que lunes sea 0 y domingo 6
+                for (let i = 0; i < ajuste; i++) {
+                    const diaAnterior = document.createElement('div');
+                    diaAnterior.classList.add('dia');
+                    calendario.appendChild(diaAnterior);
+                }
+
+                // Agregar días del mes
+                const diasEnMes = new Date(new Date().getFullYear(), mesSeleccionado, 0).getDate();
+                for (let i = 1; i <= diasEnMes; i++) {
+                    const dia = document.createElement('div');
+                    dia.classList.add('dia');
+                    dia.innerText = i;
+
+                    dia.addEventListener('click', function() {
+                        console.log(`En la grilla deberán aparecer los pedidos del dia ${i} del mes ${mes}`)
+                        const diaRecibido = i // Coloca aquí el valor del día obtenido
+                        const mesRecibido = mes // Coloca aquí el valor del mes obtenido
+
+
+
+                        const diaFormateado = formatoDosDigitos(diaRecibido);
+                        const mesFormateado = formatoDosDigitos(mesRecibido);
+
+                        // Establecer el valor del input con el formato requerido
+                        inputFecha.value = `2024-${mesFormateado}-${diaFormateado}`;
+
+                        // Enviar el formulario
+                        document.querySelector('.formulario-oculto form').submit();
+                    });
+
+                    // Corregir la condición para resaltar en naranja el día que coincide con el mes
+                    if (fechas.some(fecha => new Date(fecha).getMonth() + 1 === mesSeleccionado && i === new Date(fecha).getDate() + 1)) {
+                        dia.classList.add('dia-naranja');
+                    }
+
+                    calendario.appendChild(dia);
+                }
+
+
+
+                function formatoDosDigitos(numero) {
+                    return numero < 10 ? `0${numero}` : numero;
+                }
+
+
+            }
             
         </script>
 

@@ -316,19 +316,85 @@ def inicioAdministracion(request):
 #         return render(request, 'tesisApp/calendarioPedidos.html', {'pedidos': pedidos})
 
 
+# def calendarioPedidos(request):
+#     # Obtener todos los pedidos
+#     pedidos = Pedido.objects.all()
+
+#     # Obtener todas las fechas de entrega de los pedidos y formatearlas
+#     fechas_de_entrega_formateadas = [pedido.FechaDeEntrega.strftime('%Y-%m-%d') for pedido in pedidos]
+
+#     # Serializar las fechas como una lista JSON
+#     fechas_de_entrega_json = json.dumps(fechas_de_entrega_formateadas)
+
+#     # Puedes pasar las fechas serializadas a tu plantilla
+#     return render(request, 'tesisApp/calendarioPedidos.html', {'fechas_de_entrega': fechas_de_entrega_json})
+    
+
+
+# def recibirFecha(request):
+#     if request.method == 'POST':
+#         fecha = request.POST.get('inputFecha')
+#         print('aca van las fechas:' + fecha)
+    
+#         pedidos = Pedido.objects.filter(FechaDeEntrega=fecha)
+#         #return redirect("calendarioPedidos")
+#         # print(pedidos)
+#         return render(request, 'tesisApp/calendarioPedidos.html', {'pedidos': pedidos, 'esRecibir' : True})
+                    
+#     else:
+#         #return redirect('calendarioPedidos')
+#         return render(request, 'tesisApp/calendarioPedidos.html')
+
+    
+
 def calendarioPedidos(request):
+
+
     # Obtener todos los pedidos
-    pedidos = Pedido.objects.all()
+    pedidosCalendar = Pedido.objects.all()
 
     # Obtener todas las fechas de entrega de los pedidos y formatearlas
-    fechas_de_entrega_formateadas = [pedido.FechaDeEntrega.strftime('%Y-%m-%d') for pedido in pedidos]
+    fechas_de_entrega_formateadas = [pedido.FechaDeEntrega.strftime('%Y-%m-%d') for pedido in pedidosCalendar]
 
     # Serializar las fechas como una lista JSON
     fechas_de_entrega_json = json.dumps(fechas_de_entrega_formateadas)
 
-    # Puedes pasar las fechas serializadas a tu plantilla
-    return render(request, 'tesisApp/calendarioPedidos.html', {'fechas_de_entrega': fechas_de_entrega_json})
-    
+
+    if request.method == 'POST':
+        fecha = request.POST.get('inputFecha')
+        print('aca van las fechas:' + fecha)
+        
+        # Extraer el mes de la fecha recibida
+        mesSeleccionado = fecha.split('-')[1]
+
+        # Filtrar los pedidos por el mes seleccionado
+        pedidos = Pedido.objects.filter(FechaDeEntrega=fecha)
+        return render(request, 'tesisApp/calendarioPedidos.html', {'pedidos': pedidos, 'esRecibir' : True, 'fechas_de_entrega': fechas_de_entrega_json, 'mesDesdeBack': mesSeleccionado})
+    else:
+        # Puedes pasar las fechas serializadas a tu plantilla
+        return render(request, 'tesisApp/calendarioPedidos.html', {'fechas_de_entrega': fechas_de_entrega_json})
+        
+
+
+
+def recibirFecha(request):
+    context = {}
+    return render (request, "tesisApp/inicioAdministracion.html")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

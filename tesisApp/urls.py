@@ -24,7 +24,8 @@ urlpatterns = [
     path('inicioVentas', views.inicio, name="inicioVentas"),
     path('inicioGerente', views.inicioGerente, name="inicioGerente"),
     path('inicioPlantista', views.inicioPlantista, name="inicioPlantista"),
-    path('inicioAdministracion', views.inicioAdministracion, name="inicioAdministracion")
+    path('inicioAdministracion', views.inicioAdministracion, name="inicioAdministracion"),
+    path('recibirFecha', views.recibirFecha, name="recibirFecha")
 
 ]
 
