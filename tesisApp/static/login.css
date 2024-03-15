@@ -723,10 +723,9 @@ a.sidebar-link:hover {
   } */
  
   .contenedor-tabla{
-    width: 800px;
+    width: 1200px;
     max-height: 650px;
     overflow-y: auto;
-    margin-left: -100px;
   }
 
   .grilla{
@@ -752,18 +751,18 @@ a.sidebar-link:hover {
 
 
   .columnaCentral{
-    width: 900px;
+    width: 1200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
-
+/* 
   .contenedor-calendar{
     justify-content: center;
     flex-direction: column;
-    width: 100%;
-  }
+    
+  } */
   
 
   .aumentar{
@@ -986,5 +985,4 @@ line-height: 100px;
     margin-top: -70px;
     user-select: none;
 }
-
 
