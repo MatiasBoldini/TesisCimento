@@ -131,6 +131,8 @@ def calcular_valor_total_pedido(request, id_pedido):
 
 def correoRec(request):
     context = {}
+    a = False
+    #ESTO ES PARA VER SI LE LLEGA A ALVA_DEV
     return render(request, "tesisApp/correoRec.html", context)
 
     
