@@ -1,0 +1,7 @@
+# Ignorar el directorio __pycache__
+__pycache__/
+
+# Ignorar la carpeta migrations
+*/migrations/
+
+*/CimentoEnv/
