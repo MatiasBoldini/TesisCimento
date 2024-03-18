@@ -121,7 +121,10 @@ def modificar_precio(request, IdHormigon=None):
 
 
 
-
+def calcular_valor_total_pedido(request, id_pedido):
+    pedido = Pedido.objects.get(pk=id_pedido)
+    valor_total = pedido.calcular_valor_total()
+    return render(request, 'template_valor_total_pedido.html', {'valor_total': valor_total})
 
 
 
@@ -256,8 +259,35 @@ def nuevaContrasena(request):
 
 
 def cargaPedidos(request):
-    context= {}
-    return render(request, "tesisApp/cargaPedidos.html")
+    if request.method == 'POST':
+        # Procesar los datos del formulario para crear un nuevo pedido
+        dni_cliente = request.POST.get('dni_cliente')
+        id_obra = request.POST.get('id_obra')
+        fecha_entrega = request.POST.get('fecha_entrega')
+        cantidad_m3 = request.POST.get('cantidad_m3')
+        estado_pedido = request.POST.get('estado_pedido')
+
+        # Buscar el cliente por su DNI
+        cliente = get_object_or_404(Cliente, DNICliente=dni_cliente)
+
+        # Buscar la obra por su ID
+        obra = get_object_or_404(Obra, pk=id_obra)
+
+        # Crear un nuevo pedido utilizando el cliente y la obra encontrados
+        nuevo_pedido = Pedido.objects.create(
+            DNICliente=cliente,
+            IdObra=obra,
+            FechaDeEntrega=fecha_entrega,
+            CantidadM3=cantidad_m3,
+            EstadoPedido=estado_pedido
+        )
+
+        # Redirigir a la página de inicio del gerente en caso de éxito
+        return redirect('inicioGerente')
+
+    else:
+        # Renderizar el formulario para crear un nuevo pedido
+        return render(request, 'tesisApp/cargaPedidos.html')
 
 def consulta(request):
     context = {}
@@ -384,46 +414,7 @@ def recibirFecha(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def informes(request):
     context = {}
     return render(request, "tesisApp/informes.html")
-
-
-# def crear_pedido(request):
-#     IdPedido = models.AutoField(primary_key=True)
-
-#     # Obtén el cliente, obra y otros datos necesarios para crear el pedido
-#     cliente = Cliente.objects.get(id=1)  # Reemplaza con la lógica adecuada para obtener el cliente
-#     obra = Obra.objects.get(id=1)  # Reemplaza con la lógica adecuada para obtener la obra
-#     cantidad_m3 = 5  # Ejemplo de cantidad_m3, reemplaza con el valor adecuado
-
-#     # Crea una instancia de Pedido con el estado 'Pendiente'
-#     pedido = Pedido(
-#         DNICliente=cliente,
-#         IdObra=obra,
-#         CantidadM3=cantidad_m3,
-#         EstadoPedido='Pendiente'  # Puedes configurar el estado deseado aquí
-#     )
-
-#     # Realiza cualquier otro cálculo necesario en función de los datos proporcionados
-#     # Por ejemplo, puedes calcular NombreyApellidoCliente y ValorTotal aquí
-
-#     pedido.save()  # Guarda el objeto Pedido en la base de datos
-
-#     return redirect('detalle_pedido', pedido_id=pedido.IdPedido)  # Redirige a la vista de detalle del pedido
-
 
